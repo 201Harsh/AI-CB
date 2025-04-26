@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model");
 const userService = require("../services/user.service");
 const { validationResult } = require("express-validator");
+const BlackListedToken = require("../models/blackListedtoken.model");
 
 module.exports.registerUser = async (req, res) => {
   const error = validationResult(req);
@@ -30,6 +31,11 @@ module.exports.registerUser = async (req, res) => {
     });
 
     const token = NewUser.Jwt_Token();
+
+    res.cookie("token", token),
+      {
+        httpOnly: true,
+      };
 
     return res.status(200).json({
       message: "User created successfully",
@@ -73,10 +79,52 @@ module.exports.loginUser = async (req, res) => {
 
     const token = User.Jwt_Token();
 
+    res.cookie("token", token),
+      {
+        httpOnly: true,
+      };
+
     return res.status(200).json({
       message: "Login successful",
       user: User,
       token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+module.exports.getUserProfile = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+module.exports.logoutUser = async (req, res) => {
+  try {
+    const token = req.cookies?.token || req.headers.authorization?.split(" ")[1];
+    if (token) {
+      const blacklistedToken = await BlackListedToken.create({ token });
+    }
+    res.clearCookie("token");
+    return res.status(200).json({
+      message: "Logout successful",
     });
   } catch (error) {
     res.status(500).json({

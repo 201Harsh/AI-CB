@@ -70,7 +70,7 @@ npx nodemon
 ```bash
 cd Frontend
 npm install
-npm start
+npm run dev
 ```
 
 ---
