@@ -41,13 +41,13 @@ An AI-powered chatbot web application built using the MERN stack (MongoDB, Expre
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ai-chatbot-mern.git
-cd ai-chatbot-mern
+git clone https://github.com/201Harsh/AI-CB.git
+cd ai-cb
 ```
 
 ### 2. Setup Backend
 ```bash
-cd server
+cd Backend
 npm install
 ```
 
@@ -68,7 +68,7 @@ npx nodemon
 
 ### 3. Setup Frontend
 ```bash
-cd ../client
+cd Frontend
 npm install
 npm start
 ```
@@ -110,7 +110,7 @@ npm start
 
 - Credit deduction logic is handled in the backend
 
-- Prevents queries when credits are 0
+- Prevents queries when credits are 0w
 
 ---
 
