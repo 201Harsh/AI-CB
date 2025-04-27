@@ -30,7 +30,7 @@ router.post(
 );
 
 router.get(
-  "/get-profile",
+  "/profile",
   authMiddleware.verifyUser,
   userController.getUserProfile
 );

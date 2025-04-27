@@ -1,12 +1,12 @@
-# 🤖 AI ChatBot (MERN + Google AI API)
+# 🤖 AI ChatBot (MERN + EndGaming AI)
 
-An AI-powered chatbot web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) integrated with the Google AI API. Users can register, log in, and interact with an intelligent chatbot. The app also includes a credit-based system to limit API usage.
+An AI-powered chatbot web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) integrated with the Endgaming AI API. Users can register, log in, and interact with an intelligent chatbot. The app also includes a credit-based system to limit API usage.
 
 ---
 
 ## 🔥 Features
 
-- 🧠 AI Chat using Google AI API
+- 🧠 AI Chat using EndGaming AI API
 - 👤 User Authentication (Register / Login)
 - 🔐 JWT-based Auth with secure password hashing
 - 💳 Credit System: Limits chatbot queries based on user credits
@@ -32,7 +32,7 @@ An AI-powered chatbot web application built using the MERN stack (MongoDB, Expre
 - bcrypt
 
 ### API:
-- Google Gemini (or you can use other AI API)
+- EndGaming AI API (or you can use other AI API)
 
 ---
 
@@ -57,7 +57,7 @@ npm install
 PORT=your_Port
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-GOOGLE_API_KEY=your_google_api_key
+ENDG_API_KEY=your_endg_api_key
 ```
 
 - Start the backend:
@@ -84,7 +84,7 @@ npm run dev
 
 - Ask a question to the chatbot
 
-- Response is generated via Google AI API
+- Response is generated via AI API
 
 - Each query consumes credits
 
@@ -141,7 +141,7 @@ npm run dev
 
 ## 💬 Acknowledgments
 
-- Google Gemini API
+- END Gaming AI API
 
 - MongoDB
 
@@ -153,12 +153,12 @@ npm run dev
 
 ## 👨‍💻 Author
 
-Harsh
 GitHub: 201Harsh
+Instagram :201harshs
 
 ---
 
-## Made With ❤️ by 201Harsh
+## Made With ❤️ by Harsh
 
 
 

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
 
 @keyframes float {
@@ -40,4 +41,92 @@
 }
 .delay-100 {
   animation-delay: 100ms;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wave {
+  animation-name: wave;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes popup-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-popup-in {
+  animation: popup-in 0.2s ease-out forwards;
+}
+
+@keyframes rocket-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(2deg); }
+  50% { transform: translateY(-5px) rotate(5deg); }
+  75% { transform: translateY(-8px) rotate(8deg); }
+  100% { transform: translateY(-10px) rotate(10deg); }
+}
+
+.rocket-float {
+  display: inline-block;
+  animation: rocket-float 2s infinite ease-in-out;
+}
+
+
+
+@keyframes glow {
+  0% {
+    border-color: #facc15; /* yellow */
+    box-shadow: 0 0 10px #facc15;
+  }
+  33% {
+    border-color: #fb923c; /* orange */
+    box-shadow: 0 0 15px #fb923c;
+  }
+  66% {
+    border-color: #f87171; /* red */
+    box-shadow: 0 0 15px #f87171;
+  }
+  100% {
+    border-color: #facc15; /* back to yellow */
+    box-shadow: 0 0 10px #facc15;
+  }
+}
+
+.glowing {
+  animation: glow 2s ease-in-out infinite;
 }

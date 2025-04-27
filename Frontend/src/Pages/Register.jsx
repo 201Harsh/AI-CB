@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userDataContext } from "../Context/UserContext";
 import axios from "../Config/Axios";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { toast, Bounce , ToastContainer } from "react-toastify";
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -24,17 +25,28 @@ const Register = () => {
 
     const Newuser = { name, email, password };
 
-    const response = await axios.post(
-      "/users/register",
-      Newuser
-    );
+    const response = await axios.post("/users/register", Newuser);
 
     if (response.status === 200) {
       localStorage.setItem("token", response.data.token);
       const UserData = response.data.user;
-      localStorage.setItem('name',UserData.name)
+      localStorage.setItem("name", UserData.name);
       setuser(UserData);
-      Navigate("/home");
+      toast.success("🧑 User Registered Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+
+      setTimeout(() => {
+        Navigate("/home");
+      }, 2000);
     }
 
     setname("");
@@ -44,6 +56,19 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-[url('/bg10.jpg')] bg-cover bg-center flex items-center justify-center p-4">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="bg-[#16161665] p-8 rounded-lg shadow-xl w-full max-w-md backdrop-blur-xl">
         <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">
           Create Account
@@ -120,7 +145,7 @@ const Register = () => {
             type="submit"
             className="w-full cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-lg transition duration-200"
           >
-            Sign Up
+            Create Account
           </button>
         </form>
 
