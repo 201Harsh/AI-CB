@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import HomeProtector from "../Pages/HomeProtector";
 import AutoRedirect from "../Pages/AutoRedirect";
 import Settings from "../Pages/Settings";
+import Profile from "../Pages/Profile";
 
 const PageRoute = () => {
   return (
@@ -27,6 +28,7 @@ const PageRoute = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>
