@@ -1,10 +1,16 @@
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   ChevronRightIcon,
   CpuChipIcon,
   ShieldCheckIcon,
   UserIcon,
   CreditCardIcon,
+  FaceSmileIcon,
+  SparklesIcon,
+  ChatBubbleLeftIcon,
+  HeartIcon,
+  HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
@@ -33,15 +39,20 @@ export default function Landing() {
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="shbox rounded-full p-2">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="shbox rounded-full p-2"
+              >
                 <CpuChipIcon className="h-8 w-8 text-yellow-400" />
-              </div>
+              </motion.div>
               <span className="ml-3 text-2xl font-bold text-yellow-400">
-                End AI ChatBot
+                EmoAI ChatBot
               </span>
             </div>
             <Link
-              to-="/register"
+              to="/register"
               className="bg-yellow-500 hidden md:flex hover:bg-yellow-600 text-gray-900 px-6 py-2 rounded-full transition duration-300"
             >
               Sign In
@@ -54,32 +65,103 @@ export default function Landing() {
       <section className="relative bg-gradient-to-b from-gray-800 to-gray-900 py-20">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl font-bold text-yellow-400 mb-6 animate-fade-in-down">
-              Conversational AI Powered by EndGaming AI
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 animate-fade-in-up delay-100">
-              Experience next-generation AI conversations with our intelligent
-              chatbot system
-            </p>
-            <Link
-              to="/register"
-              className="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition duration-300 transform active:scale-95"
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl font-bold text-yellow-400 mb-6"
             >
-              Get Started - It's Free
-              <ChevronRightIcon className="h-5 w-5 inline-block ml-2" />
-            </Link>
+              Emotionally Intelligent AI Conversations
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-gray-300 mb-8"
+            >
+              Experience an AI that understands you, supports you, and can be
+              your best companion.
+            </motion.p>
+
+            {/* Emotional Features Grid */}
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              {[
+                "😊 Empathy",
+                "🎭 Mood Adaption",
+                "🧠 Context Aware",
+                "❤️ Emotional Memory",
+              ].map((text, index) => (
+                <div key={index} className="bg-yellow-400/10 p-3 rounded-lg">
+                  <p className="text-yellow-400">{text}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <Link
+                to="/register"
+                className="bg-yellow-500 inline-block hover:bg-yellow-600 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition duration-300 transform hover:scale-105"
+              >
+                Start Emotional Journey
+                <ChevronRightIcon className="h-5 w-5 inline-block ml-2" />
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Animated Bot Illustration */}
-          <div className="mt-16 relative max-w-2xl mx-auto animate-float">
-            <svg className="w-full h-64" viewBox="0 0 512 512">
-              <path
-                d="M256 32C132.3 32 32 132.3 32 256s100.3 224 224 224 224-100.3 224-224S379.7 32 256 32zm-32 128h64v64h-64zm128 192h-96v-32h-32v32h-96l16-96h192l16 96z"
-                fill="#F59E0B"
-                className="transition-all duration-500"
-              />
-            </svg>
-          </div>
+          {/* Replaced SVG Animated Section */}
+          <motion.div
+            className="mt-20 relative bg-gray-800 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <h3 className="text-3xl text-yellow-400 font-bold mb-6">
+              Your AI Companion
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              {[
+                {
+                  icon: HeartIcon,
+                  title: "Girlfriend/Boyfriend",
+                  desc: "Talk, flirt, and feel cared for with AI that listens deeply and responds affectionately.",
+                },
+                {
+                  icon: HandThumbUpIcon,
+                  title: "Best Friend",
+                  desc: "Laugh, share secrets, and enjoy endless late-night conversations with your AI buddy.",
+                },
+                {
+                  icon: FaceSmileIcon,
+                  title: "Friendly Chat",
+                  desc: "Feeling lonely? EmoAI is there to cheer you up and keep you company anytime.",
+                },
+                {
+                  icon: SparklesIcon,
+                  title: "Custom Personalities",
+                  desc: "Switch between different personality modes to match your mood and needs.",
+                },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start space-x-4">
+                  <item.icon className="h-10 w-10 text-yellow-400" />
+                  <div>
+                    <h4 className="text-xl text-yellow-400 font-semibold mb-1">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-300">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -87,36 +169,52 @@ export default function Landing() {
       <section className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-yellow-400 text-center mb-12">
-            Key Features
+            Core Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                icon: FaceSmileIcon,
+                title: "Emotion Recognition",
+                desc: "Real-time sentiment analysis adapts responses to your emotional state",
+              },
+              {
+                icon: SparklesIcon,
+                title: "Personality Modes",
+                desc: "Switch between professional, friendly, or empathetic interaction styles",
+              },
+              {
+                icon: ChatBubbleLeftIcon,
+                title: "Context Memory",
+                desc: "Remembers conversation history for coherent long-term dialogues",
+              },
+              {
                 icon: UserIcon,
                 title: "Secure Auth",
-                desc: "JWT protected authentication with bcrypt hashing",
+                desc: "Military-grade encryption for all user data and conversations",
               },
               {
                 icon: ShieldCheckIcon,
-                title: "API Protection",
-                desc: "Rate limiting and credit-based access control",
+                title: "Privacy First",
+                desc: "End-to-end encryption and strict data protection policies",
               },
               {
                 icon: CreditCardIcon,
-                title: "Credit System",
-                desc: "Fair usage policy with credit management",
+                title: "Flexible Credits",
+                desc: "Fair usage system with multiple subscription options",
               },
             ].map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-gray-700 p-6 rounded-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl animate-on-scroll opacity-0 translate-y-10"
+                className="bg-gray-700 p-6 rounded-xl transform transition duration-300 hover:scale-[1.02] hover:shadow-2xl animate-on-scroll opacity-0 translate-y-10"
+                whileHover={{ scale: 1.05 }}
               >
                 <feature.icon className="h-12 w-12 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-semibold text-yellow-400 mb-2">
                   {feature.title}
                 </h3>
                 <p className="text-gray-300">{feature.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -128,7 +226,9 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
               <CpuChipIcon className="h-8 w-8 text-yellow-400" />
-              <span className="ml-2 text-xl text-yellow-400">End AI ChatBot</span>
+              <span className="ml-2 text-xl text-yellow-400">
+                EmoAI ChatBot
+              </span>
             </div>
             <div className="flex space-x-6">
               <a
@@ -138,25 +238,26 @@ export default function Landing() {
                 GitHub
               </a>
               <a
-                href="https://github.com/201Harsh/AI-CB?tab=readme-ov-file#-ai-chatbot-mern--google-ai-api"
+                target="_blank"
+                href="https://github.com/201Harsh/AI-CB?tab=readme-ov-file#readme"
                 className="text-gray-400 hover:text-yellow-400 transition duration-300"
               >
-                Docs
+                Documentation
               </a>
-              <a
-                href="https://github.com/201Harsh/AI-CB?tab=readme-ov-file#-license"
+              <Link
+                to="/pricing"
                 className="text-gray-400 hover:text-yellow-400 transition duration-300"
               >
-                License
-              </a>
+                Pricing
+              </Link>
             </div>
           </div>
           <div className="mt-6 text-center text-gray-400">
             <p>
-              Built with ❤️ by{" "}
+              Crafted with ❤️ by{" "}
               <a
-                className="text-yellow-400 font-semibold"
                 href="https://www.instagram.com/201harshs/"
+                className="text-yellow-400 font-semibold"
               >
                 Harsh
               </a>{" "}

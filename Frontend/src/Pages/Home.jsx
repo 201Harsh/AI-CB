@@ -40,10 +40,17 @@ const Home = () => {
       }
     };
 
-    handleResize(); // Call once on mount
+    // Small timeout to ensure proper window size calculation especially on mobile refresh
+    const timeoutId = setTimeout(() => {
+      handleResize(); // Call once after a very short delay
+    }, 100); // 100ms
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -57,7 +64,6 @@ const Home = () => {
       setIsResGen(false);
     }
   }, []);
-
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
@@ -117,18 +123,17 @@ const Home = () => {
         />
         {/* Button to open sidebar */}
         {IsTite ? (
-          <div
-            className="flex items-center gap-4 mt-5 relative w-52"
-            onClick={() => setIsOpen(true)}
-          >
-            <div className="flex ml-4">
-              <CpuChipIcon className="h-8 w-8 text-yellow-400" />
-              <span className="ml-2 text-xl font-bold text-yellow-400">
-                AI ChatBot
-              </span>
+          <header className="absolute top-0 left-0 right-0 z-10 bg-transparent backdrop-blur-sm border-b border-gray-800 h-16 flex items-center px-4">
+            <div className="flex items-center gap-4">
+              <div onClick={() => setIsOpen(true)} className="flex">
+                <CpuChipIcon className="h-8 w-8 text-yellow-400" />
+                <span className="ml-2 text-xl font-bold text-yellow-400">
+                  EmoAI
+                </span>
+                <Bars3Icon className="h-8 w-8 text-white ml-auto cursor-pointer md:hidden" />
+              </div>
             </div>
-            <Bars3Icon className="h-8 w-8 text-white cursor-pointer md:hidden" />
-          </div>
+          </header>
         ) : (
           <Bars3Icon
             className="h-8 w-8 text-white absolute top-0 right-4 cursor-pointer z-20 md:hidden"
@@ -136,7 +141,7 @@ const Home = () => {
           />
         )}
 
-        <div className="flex h-full w-full relative justify-between">
+        <div className="flex h-full w-full pt-16 relative justify-between">
           {/* Sidebar */}
           <div
             className={`fixed md:relative z-40 top-0 left-0 h-full bg-gray-800 text-white transition-transform duration-300
@@ -154,7 +159,7 @@ const Home = () => {
                 <div className="flex items-center mb-14">
                   <CpuChipIcon className="h-8 w-8 text-yellow-400" />
                   <span className="ml-2 text-xl font-bold text-yellow-400">
-                    AI ChatBot
+                    EmoAI ChatBot
                   </span>
                 </div>
                 <div className="flex flex-col gap-4 p-4">
@@ -175,7 +180,11 @@ const Home = () => {
                   </Link>
 
                   <Link
-                    to="#"
+                    to="#" onClick={()=>{
+                      localStorage.removeItem('responseornot');
+                      localStorage.removeItem('chat_messages');
+                      IsResGen(false);
+                    }}
                     className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
                   >
                     <ChatBubbleLeftIcon className="w-6 h-6 text-yellow-400" />
@@ -254,7 +263,7 @@ const Home = () => {
 
                 {/* Welcome message */}
                 <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-yellow-300 to-[#d6f813] bg-clip-text text-transparent mt-4">
-                  Welcome to AI ChatBot
+                  Welcome to EmoAI ChatBot
                 </h1>
 
                 {/* Small note */}

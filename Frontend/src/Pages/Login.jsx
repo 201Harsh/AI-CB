@@ -5,6 +5,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { userDataContext } from "../Context/UserContext";
 import axios from "../Config/Axios";
 import { toast, Bounce , ToastContainer } from "react-toastify";
+import { motion } from "framer-motion";
 
 
 const Login = () => {
@@ -50,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[url('/bg10.jpg')] bg-cover bg-center flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[url('/bg4.jpg')] bg-cover bg-center flex items-center justify-center p-4">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -64,44 +65,60 @@ const Login = () => {
         theme="dark"
         transition={Bounce}
       />
-      <div className="bg-[#16161665] p-8 rounded-lg shadow-xl w-full max-w-md backdrop-blur-xl">
-        <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">
-          Login to Account
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-gradient-to-br from-yellow-900/20 to-gray-900/100 p-8 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-xl border border-yellow-400/30"
+      >
+        <h2 className="text-4xl font-bold text-yellow-400 mb-8 text-center font-[Poppins]">
+          Welcome Back
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-gray-300 text-sm font-semibold mb-2">
-              Email
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Email Input */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <label className="block text-yellow-400/80 text-sm font-semibold mb-3">
+              Email Address
             </label>
-            <div className="relative">
-              <EnvelopeIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <div className="relative group">
+              <EnvelopeIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2 group-focus-within:text-yellow-500 transition-colors" />
               <input
                 type="email"
                 name="email"
                 value={email}
                 required
                 onChange={(e) => setemail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-transparent border-b-2 border-white text-white outline-none"
-                placeholder="Enter your email"
+                className="w-full pl-10 pr-4 py-3 bg-gray-800/40 text-yellow-100 rounded-lg border-2 border-yellow-400/30 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/30 outline-none transition-all placeholder:text-yellow-400/50"
+                placeholder="endgamingai2@gmail.com"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div>
-            <label className="block text-gray-300 text-sm font-semibold mb-2">
+          {/* Password Input */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <label className="block text-yellow-400/80 text-sm font-semibold mb-3">
               Password
             </label>
-            <div className="relative">
-              <LockClosedIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <div className="relative group">
+              <LockClosedIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2 group-focus-within:text-yellow-500 transition-colors" />
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={password}
                 required
                 onChange={(e) => setpassword(e.target.value)}
-                className="w-full pl-10 pr-10 py-2 bg-transparent border-b-2 border-white text-white outline-none"
-                placeholder="Enter your password"
+                className="w-full pl-10 pr-12 py-3 bg-gray-800/40 text-yellow-100 rounded-lg border-2 border-yellow-400/30 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/30 outline-none transition-all placeholder:text-yellow-400/50"
+                placeholder="••••••••"
               />
               <button
                 type="button"
@@ -109,32 +126,39 @@ const Login = () => {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-yellow-400 hover:text-yellow-500 transition-colors"
               >
                 {showPassword ? (
-                  <EyeSlashIcon className="h-5 w-5" />
+                  <EyeSlashIcon className="h-6 w-6" />
                 ) : (
-                  <EyeIcon className="h-5 w-5" />
+                  <EyeIcon className="h-6 w-6" />
                 )}
               </button>
             </div>
-          </div>
+          </motion.div>
 
-          <button
-            type="submit"
-            className="w-full cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-lg transition duration-200"
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            Login
-          </button>
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r cursor-pointer from-yellow-500 to-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg transition-all 
+              hover:from-yellow-600 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/20"
+            >
+              LogIn
+            </button>
+          </motion.div>
         </form>
 
-        <p className="text-center text-gray-400 mt-6">
-          New Here? Create an account{" "}
+        <p className="text-center text-yellow-400/80 mt-8">
+          New to EmoAI?{" "}
           <Link
             to="/register"
-            className="text-yellow-400 hover:text-yellow-500 underline"
+            className="text-yellow-400 font-semibold hover:text-yellow-500 underline underline-offset-4 transition-colors"
           >
-            Register here
+            Create an account
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

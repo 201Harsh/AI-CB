@@ -9,6 +9,7 @@ import AutoRedirect from "../Pages/AutoRedirect";
 import Settings from "../Pages/Settings";
 import Profile from "../Pages/Profile";
 import OTPVerification from "../Pages/OTPVerification";
+import Pricing from "../Pages/Pricing";
 
 const PageRoute = () => {
   return (
@@ -31,6 +32,7 @@ const PageRoute = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
       </BrowserRouter>
     </>

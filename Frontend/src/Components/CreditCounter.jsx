@@ -2,8 +2,8 @@ import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 const CreditCounter = ({ credits }) => {
   return (
-    <div className="fixed top-2 right-2 md:top-auto md:right-auto md:bottom-96 md:mb-2 md:left-10 z-10 md:z-50 flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-lg border border-yellow-400/20 shadow-lg hover:shadow-yellow-400/10 transition-all duration-300 group">
-      <CurrencyDollarIcon className="h-5 w-5 text-yellow-400" />
+    <div className="fixed top-2 right-2 md:top-auto md:right-auto md:bottom-80 md:mb-2 md:left-10 z-10 md:z-50 flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-lg border border-yellow-400/20 shadow-lg hover:shadow-yellow-400/10 transition-all duration-300 group">
+      <CurrencyDollarIcon className="h-5 w-5 text-yellow-400" />  
       <span className="text-yellow-400 font-semibold">
         Credits: 
         <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent ml-1">
