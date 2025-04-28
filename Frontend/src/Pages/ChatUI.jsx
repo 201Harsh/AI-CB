@@ -4,7 +4,6 @@ import axios from "../Config/Axios";
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import CreditCounter from "../Components/CreditCounter";
 
-
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -71,6 +70,13 @@ const ChatUI = () => {
     }
   };
 
+  // Watch when IsRes changes
+  useEffect(() => {
+    if (IsRes) {
+      localStorage.setItem("responseornot", true);
+    }
+  }, [IsRes]);
+
   // Fetch the latest credit value from the backend
   const getCredits = async () => {
     try {
@@ -128,13 +134,13 @@ const ChatUI = () => {
         transition={Bounce}
       />
       <CreditCounter credits={credits} />
-      <div className="flex-1 overflow-y-auto md:p-6 p-2 space-y-4 chat-box">
+      <div className="flex-1 overflow-y-auto md:p-7 p-2 space-y-4 chat-box">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex justify-${
-              message.sender === "user" ? "end" : "start"
-            } w-full`}
+            className={`flex w-full ${
+              message.sender === "user" ? "justify-end" : "justify-start"
+            }`}
           >
             <div
               className={`p-4 min-w-26 max-w-80 md:max-w-[70%] font-medium text-sm ${
@@ -169,8 +175,8 @@ const ChatUI = () => {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 bg-gray-800 text-yellow-400 rounded-lg px-4 py-2 
-                     focus:outline-none focus:ring-2 focus:ring-yellow-500
+              className="flex-1 bg-gray-800 text-yellow-400 rounded-lg px-4 py-2 border-2 border-yellow-400 
+                     focus:outline-none focus:ring-1 focus:ring-yellow-500
                      placeholder:text-yellow-400/50"
             />
             <button
@@ -179,7 +185,7 @@ const ChatUI = () => {
                     rounded-lg transition duration-200 flex items-center justify-center
                     active:scale-95"
             >
-              <PaperAirplaneIcon className="h-5 w-5 rotate-45" />
+              <PaperAirplaneIcon className="h-5 w-5 rotate-[-40deg]" />
             </button>
           </form>
         </div>

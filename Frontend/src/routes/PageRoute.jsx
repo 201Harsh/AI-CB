@@ -8,6 +8,7 @@ import HomeProtector from "../Pages/HomeProtector";
 import AutoRedirect from "../Pages/AutoRedirect";
 import Settings from "../Pages/Settings";
 import Profile from "../Pages/Profile";
+import OTPVerification from "../Pages/OTPVerification";
 
 const PageRoute = () => {
   return (
@@ -26,6 +27,7 @@ const PageRoute = () => {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/otp-verification" element={<OTPVerification />} />
           <Route path="/home" element={<Home />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />

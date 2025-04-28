@@ -5,10 +5,10 @@ import {
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
-import { userDataContext } from "../Context/UserContext";
 import axios from "../Config/Axios";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { toast, Bounce , ToastContainer } from "react-toastify";
+import { toast, Bounce, ToastContainer } from "react-toastify";
+import { userDataContext } from "../context/UserContext";
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -29,25 +29,12 @@ const Register = () => {
 
     if (response.status === 200) {
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem('otp', response.data.otp);
       const UserData = response.data.user;
       localStorage.setItem("name", UserData.name);
       localStorage.setItem("email", UserData.email);
       setuser(UserData);
-      toast.success("🧑 User Registered Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-
-      setTimeout(() => {
-        Navigate("/home");
-      }, 2000);
+      Navigate("/otp-verification");
     }
 
     setname("");
