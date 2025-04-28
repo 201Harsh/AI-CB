@@ -26,6 +26,7 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       const Users = response.data.user;
       localStorage.setItem("name", Users.name);
+      localStorage.setItem("email", Users.email);
       setuser(Users);
       toast.success("🧑 User Login Successfully", {
         position: "top-right",

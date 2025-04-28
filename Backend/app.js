@@ -4,6 +4,7 @@ ConnectTDB();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user.route");
+const aiRouter = require("./routes/ai.route");
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/users", userRouter);
+app.use("/ai", aiRouter);
 
 module.exports = app;

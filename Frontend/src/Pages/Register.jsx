@@ -31,6 +31,7 @@ const Register = () => {
       localStorage.setItem("token", response.data.token);
       const UserData = response.data.user;
       localStorage.setItem("name", UserData.name);
+      localStorage.setItem("email", UserData.email);
       setuser(UserData);
       toast.success("🧑 User Registered Successfully", {
         position: "top-right",

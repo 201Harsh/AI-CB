@@ -8,6 +8,7 @@ import {
   ChatBubbleLeftIcon,
   CpuChipIcon,
   StopCircleIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 
 import SplashCursor from "../Animations/SplashCursor";
@@ -16,13 +17,15 @@ import axios from "../Config/Axios";
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import PopUp from "../Components/PopUp";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import ChatUI from "./ChatUI";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [splashEnabled, setSplashEnabled] = useState(false);
   const [IsTite, setIsTite] = useState(false);
   const [showPopup, setShowPopup] = useState(true); // Added popup state
-  const [prompt, setprompt] = useState("");
+  const [username, setusername] = useState("");
+  const [IsResGen, setIsResGen] = useState(false);
 
   const Navigate = useNavigate();
 
@@ -43,13 +46,18 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const username = localStorage.getItem("name");
+  useEffect(() => {
+    setusername(localStorage.getItem("name"));
+    const resgenornot = localStorage.getItem("responseornot");
 
-  const handleprompt = (e) => {
-    e.preventDefault();
-    console.log(prompt);
-    setprompt("");
-  };
+    if (resgenornot === "true") {
+      setIsResGen(true);
+      setShowPopup(false);
+    } else {
+      setIsResGen(false);
+    }
+  }, []);
+
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
@@ -58,8 +66,7 @@ const Home = () => {
     });
 
     if (response.status === 200) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("name");
+      localStorage.clear();
       toast.success("🧑 User Logout Successfully", {
         position: "bottom-left",
         autoClose: 5000,
@@ -234,53 +241,45 @@ const Home = () => {
           {/* Main content area */}
           {splashEnabled && <SplashCursor />}
           <div className="bg-gray-900 h-full w-full md:w-[80%]">
-            <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10">
-              {/* Main greeting */}
-              <h1 className="font-bold text-4xl md:text-6xl text-yellow-400 flex items-center gap-2">
-                Hello{" "}
-                <span className="bg-gradient-to-r from-orange-300 to-red-200 bg-clip-text text-transparent">
-                  {username}
-                </span>
-                <span className="wave">👋</span>
-              </h1>
+            {!IsResGen ? (
+              <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10">
+                {/* Main greeting */}
+                <h1 className="font-bold text-4xl md:text-6xl text-yellow-400 flex items-center gap-2">
+                  Hello{" "}
+                  <span className="bg-gradient-to-r from-orange-300 to-red-200 bg-clip-text text-transparent">
+                    {username}
+                  </span>
+                  <span className="wave">👋</span>
+                </h1>
 
-              {/* Welcome message */}
-              <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-yellow-300 to-[#d6f813] bg-clip-text text-transparent mt-4">
-                Welcome to AI ChatBot
-              </h1>
+                {/* Welcome message */}
+                <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-yellow-300 to-[#d6f813] bg-clip-text text-transparent mt-4">
+                  Welcome to AI ChatBot
+                </h1>
 
-              {/* Small note */}
-              <h4 className="font-bold text-lg md:text-xl text-gray-400 mt-4">
-                ~ AI Powered 💪 By EndGaming{" "}
-                <span className="ml-2 rocket-float">🚀</span>
-              </h4>
-            </div>
-            <div className="relative w-full">
-              <div className="absolute bottom-8 mb:bottom-0 left-0 w-full h-42 z-10 p-4 md:p-14">
-                <form
-                  onSubmit={handleprompt}
-                  className="flex items-center justify-between w-full font-semibold text-white bg-gray-700 md:mt-0 mt-10 p-4 md:p-7 rounded-2xl"
-                >
-                  <textarea
-                    value={prompt}
-                    autoFocus
-                    onChange={(e) => setprompt(e.target.value)}
-                    className="w-[80%] bg-transparent outline-none resize-none"
-                    placeholder="Type your message here..."
-                    rows={1}
-                    onInput={(e) => {
-                      e.target.style.height = "auto";
-                      e.target.style.height = e.target.scrollHeight + "px";
-                    }}
-                    maxLength={10000} // optional: limit max total length
-                    required
-                  />
-                  <button type="submit">
-                    <PaperAirplaneIcon className="h-7 w-7 cursor-pointer" />
-                  </button>
-                </form>
+                {/* Small note */}
+                <h4 className="font-bold text-lg md:text-xl text-gray-400 mt-4">
+                  ~ AI Powered 💪 By EndGaming{" "}
+                  <span className="ml-2 rocket-float">🚀</span>
+                </h4>
+                <div className="p-4 mb:mb-0 mb-16 absolute bottom-0 w-full">
+                  <div className="flex gap-2 items-center justify-center">
+                    <button
+                      onClick={() => setIsResGen(true)}
+                      type="submit"
+                      className="bg-gray-600 md:w-96 w-full hover:bg-gray-700 text-gray-100 px-4 py-2 
+                    rounded-lg transition duration-200 flex items-center justify-center
+                    active:scale-95 cursor-pointer"
+                    >
+                      <ChatBubbleOvalLeftEllipsisIcon className="h-8 w-8 mr-3" />
+                      Start Chat Now !!
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <ChatUI />
+            )}
           </div>
         </div>
       </div>

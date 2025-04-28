@@ -130,3 +130,13 @@
 .glowing {
   animation: glow 2s ease-in-out infinite;
 }
+
+.chat-box::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 568px) {
+  .chat-box::-webkit-scrollbar {
+    display: block;
+  }
+}

@@ -3,6 +3,7 @@ const userModel = require("../models/user.model");
 const userController = require("../controllers/user.controller");
 const { body } = require("express-validator");
 const authMiddleware = require("../middlewares/user.middleware");
+const aiMiddleware = require("../middlewares/ai.middleware");
 
 router.post(
   "/register",
@@ -35,10 +36,8 @@ router.get(
   userController.getUserProfile
 );
 
-router.get(
-  "/logout",
-  authMiddleware.verifyUser,
-  userController.logoutUser
-);
+router.get("/logout", authMiddleware.verifyUser, userController.logoutUser);
+
+router.get("/get-credit", authMiddleware.verifyUser, userController.getCredit);
 
 module.exports = router;

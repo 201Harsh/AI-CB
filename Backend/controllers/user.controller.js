@@ -118,13 +118,32 @@ module.exports.getUserProfile = async (req, res) => {
 
 module.exports.logoutUser = async (req, res) => {
   try {
-    const token = req.cookies?.token || req.headers.authorization?.split(" ")[1];
+    const token =
+      req.cookies?.token || req.headers.authorization?.split(" ")[1];
     if (token) {
       const blacklistedToken = await BlackListedToken.create({ token });
     }
     res.clearCookie("token");
     return res.status(200).json({
       message: "Logout successful",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+module.exports.getCredit = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json({
+      credit: user,
     });
   } catch (error) {
     res.status(500).json({
