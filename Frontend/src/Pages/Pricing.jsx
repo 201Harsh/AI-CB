@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { CurrencyDollarIcon, CheckIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Pricing = () => {
+  const navigate = useNavigate();
   const creditTiers = [
     {
+      id: "starter",
       name: "Starter",
       credits: 300,
       price: 450,
@@ -14,6 +18,7 @@ const Pricing = () => {
       ]
     },
     {
+      id: "pro",
       name: "Pro",
       credits: 1000,
       price: 1250,
@@ -26,6 +31,7 @@ const Pricing = () => {
       popular: true
     },
     {
+      id: "enterprise",
       name: "Enterprise",
       credits: 8000,
       price: 4250,
@@ -38,6 +44,10 @@ const Pricing = () => {
       ]
     }
   ];
+
+  const handleSelectPlan = (planId) => {
+    navigate(`/payment/${planId}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 py-20 px-4 sm:px-6 lg:px-8">
@@ -67,7 +77,7 @@ const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {creditTiers.map((tier, index) => (
             <motion.div
-              key={tier.name}
+              key={tier.id}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
@@ -110,9 +120,12 @@ const Pricing = () => {
                 whileTap={{ scale: 0.95 }}
                 className="mt-8"
               >
-                <button className="w-full cursor-pointer bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 
-                              py-3 px-6 rounded-lg font-bold hover:from-yellow-600 hover:to-yellow-700 
-                              transition-all shadow-lg hover:shadow-yellow-500/20">
+                <button 
+                  onClick={() => handleSelectPlan(tier.id)}
+                  className="w-full cursor-pointer bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 
+                            py-3 px-6 rounded-lg font-bold hover:from-yellow-600 hover:to-yellow-700 
+                            transition-all shadow-lg hover:shadow-yellow-500/20"
+                >
                   Get {tier.name}
                 </button>
               </motion.div>
