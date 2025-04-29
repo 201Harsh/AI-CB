@@ -136,26 +136,42 @@ const ChatUI = () => {
 
   // Format the AI response to show highlighted text
   const formatMessage = (message) => {
-    const formattedMessage = message.split("\n").map((line, index) => {
-      // Split by '**' to highlight parts
-      const parts = line.split("**").map((part, index) => {
-        const key = `${line}-${index}`; // Create a unique key by combining line and part index
-        if (index % 2 === 1) {
-          // Bold the part that is surrounded by '**'
+    const formattedMessage = message.split("\n").map((line, lineIndex) => {
+      const regex = /(\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  
+      const parts = line.split(regex).map((part, partIndex) => {
+        const key = `${lineIndex}-${partIndex}`;
+        
+        if (part.startsWith("***") && part.endsWith("***")) {
           return (
-            <span key={key} className="font-bold text-gray-950 font-lg">
-              {part}
+            <span key={key} className="font-bold italic text-gray-950 text-sm md:text-lg block">
+              {part.slice(3, -3)}
+            </span>
+          );
+        } else if (part.startsWith("**") && part.endsWith("**")) {
+          return (
+            <span key={key} className="font-bold text-gray-950 text-sm md:text-lg block mb-2">
+              {part.slice(2, -2)}
+            </span>
+          );
+        } else if (part.startsWith("*") && part.endsWith("*")) {
+          return (
+            <span key={key} className="italic text-gray-700">
+              {part.slice(1, -1)}
             </span>
           );
         }
+  
         return part;
       });
-
-      return <p key={index}>{parts}</p>; // Add key to each paragraph
+  
+      return <p key={lineIndex}>{parts}</p>;
     });
-
+  
     return formattedMessage;
   };
+  
+  
 
   // Add this to your component
   useEffect(() => {
@@ -261,7 +277,7 @@ const ChatUI = () => {
             }`}
           >
             <div
-              className={`p-3 min-w-20 max-w-[85%] text-sm ${
+              className={`p-3 min-w-20 max-w-[85%] md:text-sm text-xs ${
                 message.sender === "user"
                   ? "bg-gray-700 text-yellow-400"
                   : "bg-gray-300 text-gray-900"
@@ -315,6 +331,7 @@ const ChatUI = () => {
           >
             <input
               type="text"
+              autoFocus
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Type your message..."

@@ -10,7 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 import axios from "../Config/Axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const Profile = () => {
   // Dummy data - Replace with real data from backend
@@ -19,13 +20,14 @@ const Profile = () => {
     email: "john.aiuser@example.com",
     joinDate: "January 2023",
     avatar: "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=John",
-    credits: 45,
     totalQueries: 128,
     bio: "AI enthusiast exploring the boundaries of machine intelligence and human creativity.",
     membership: "Premium",
   };
 
   const [user, setuser] = useState("");
+
+  const Navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -34,15 +36,52 @@ const Profile = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setuser(response.data.user);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchProfile();
   }, []);
 
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get("/users/logout", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.status === 200) {
+      localStorage.clear();
+      toast.success("🧑 User Logout Successfully", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setTimeout(() => {
+        Navigate("/login");
+      }, 2000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 p-6 md:p-8">
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -126,11 +165,14 @@ const Profile = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-4">
-          <Link to="/" className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-6 py-3 rounded-lg transition duration-200 flex-1 flex items-center justify-center gap-2">
+          <Link
+            to="/"
+            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-6 py-3 rounded-lg transition duration-200 flex-1 flex items-center justify-center gap-2"
+          >
             <BackwardIcon className="h-5 w-5 text-gray-900" />
             Back to Home
           </Link>
-          <button className="bg-red-500/20 hover:bg-red-600/30 text-red-400 px-6 py-3 rounded-lg transition duration-200 flex-1 flex items-center justify-center gap-2">
+          <button onClick={handleLogout} className="bg-red-500/20 cursor-pointer hover:bg-red-600/30 text-red-400 px-6 py-3 rounded-lg transition duration-200 flex-1 flex items-center justify-center gap-2">
             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
             Logout All Devices
           </button>

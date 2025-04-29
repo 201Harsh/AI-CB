@@ -141,7 +141,7 @@ const Home = () => {
           />
         )}
 
-        <div className="flex h-full w-full pt-16 relative justify-between">
+        <div className="flex h-full w-full md:pt-4 pt-16 relative justify-between">
           {/* Sidebar */}
           <div
             className={`fixed md:relative z-40 top-0 left-0 h-full bg-gray-800 text-white transition-transform duration-300
@@ -180,9 +180,10 @@ const Home = () => {
                   </Link>
 
                   <Link
-                    to="#" onClick={()=>{
-                      localStorage.removeItem('responseornot');
-                      localStorage.removeItem('chat_messages');
+                    to="#"
+                    onClick={() => {
+                      localStorage.removeItem("responseornot");
+                      localStorage.removeItem("chat_messages");
                       IsResGen(false);
                     }}
                     className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
@@ -262,14 +263,18 @@ const Home = () => {
                 </h1>
 
                 {/* Welcome message */}
-                <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-yellow-300 to-[#d6f813] bg-clip-text text-transparent mt-4">
+                <h1 className="font-bold text-center text-3xl md:text-5xl bg-gradient-to-r from-yellow-300 to-[#d6f813] bg-clip-text text-transparent mt-4">
                   Welcome to EmoAI ChatBot
                 </h1>
 
                 {/* Small note */}
                 <h4 className="font-bold text-lg md:text-xl text-gray-400 mt-4">
                   ~ AI Powered 💪 By EndGaming{" "}
-                  <span className="ml-2 rocket-float">🚀</span>
+                  <img
+                    src="https://cdn.pixabay.com/animation/2024/04/27/19/29/19-29-06-468_512.gif"
+                    className="h-10 w-10 inline-block rotate-45"
+                    alt="Rocket animation"
+                  />
                 </h4>
                 <div className="p-4 mb:mb-0 mb-16 absolute bottom-0 w-full">
                   <div className="flex gap-2 items-center justify-center">
