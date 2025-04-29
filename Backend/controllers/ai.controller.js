@@ -3,9 +3,7 @@ const UserModel = require("../models/user.model");
 
 module.exports.genResponse = async (req, res) => {
   try {
-    const prompt = req.body.prompt;
-
-    const {email} = req.body.email;
+    const { email, name, prompt } = req.body;
 
     if (!prompt) {
       return res.status(400).json({
@@ -13,7 +11,7 @@ module.exports.genResponse = async (req, res) => {
       });
     }
 
-    const user = await UserModel.findOne(email); // Find user by ID
+    const user = await UserModel.findOne({ email }); // Find user by ID
 
     if (!user) {
       return res.status(404).json({
@@ -33,7 +31,7 @@ module.exports.genResponse = async (req, res) => {
     // Step 3: Save the updated user record in the database
     await user.save();
 
-    const response = await ai(prompt);
+    const response = await ai(prompt, name);
     res.status(200).json({
       response,
     });

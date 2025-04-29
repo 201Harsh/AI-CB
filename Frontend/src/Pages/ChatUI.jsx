@@ -40,6 +40,8 @@ const ChatUI = () => {
     }
   }, [messages]);
 
+  const name = localStorage.getItem("name");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputMessage.trim() !== "") {
@@ -55,6 +57,7 @@ const ChatUI = () => {
         const response = await axios.post("/ai/aires", {
           prompt: inputMessage,
           email,
+          name,
         });
 
         // Check if credits are available, using the backend logic
@@ -62,7 +65,7 @@ const ChatUI = () => {
 
         if (credits <= 0) {
           toast.error("You have reached your credit limit.", {
-            position: "top-center",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: false,
@@ -81,19 +84,19 @@ const ChatUI = () => {
           const AIResponse = { text: response.data.response, sender: "Ai" };
           setMessages((prevMessages) => [...prevMessages, AIResponse]);
 
-        if (response.status === 500){
-          toast.error("Server Error", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-          });
-        }
+          if (response.status === 500) {
+            toast.error("Server Error", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          }
 
           // Optionally: You can refresh the credit after each message if needed
           getCredits(); // This ensures the frontend reflects the latest credit balance
@@ -103,7 +106,7 @@ const ChatUI = () => {
 
         if (status === 400) {
           toast.error("You have reached your credit limit.", {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: false,
@@ -113,15 +116,15 @@ const ChatUI = () => {
             theme: "dark",
             transition: Bounce,
           });
-      
+
           setTimeout(() => {
             Navigate("/pricing");
           }, 5000);
           return;
         }
-      
+
         if (status === 500) {
-          toast.error("Server error occurred. Please try again later.", {
+          toast.error("AI is overloaded. Please wait and try again..", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -134,7 +137,7 @@ const ChatUI = () => {
           });
           return;
         }
-      
+
         toast.error("Something went wrong. Please try again.", {
           position: "top-center",
           autoClose: 5000,
@@ -163,7 +166,9 @@ const ChatUI = () => {
   // Fetch the latest credit value from the backend
   const getCredits = async () => {
     try {
-      const response = await axios.get("/users/get-credit");
+      const response = await axios.get("/users/get-credit", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       if (response.status === 200) {
         const creditValue = response.data.credit.credits;
         setCredits(creditValue); // Update the state with the credit value
@@ -181,41 +186,59 @@ const ChatUI = () => {
   // Format the AI response to show highlighted text
   const formatMessage = (message) => {
     const formattedMessage = message.split("\n").map((line, lineIndex) => {
-      const regex = /(\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*)/g;
-  
+      const regex =
+        /(\*\*\([^)]+\)\*\*|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
+
       const parts = line.split(regex).map((part, partIndex) => {
         const key = `${lineIndex}-${partIndex}`;
-        
-        if (part.startsWith("***") && part.endsWith("***")) {
+
+        // 💡 Handle **(hidden text)** first so it doesn't get caught by other patterns
+        if (part.startsWith("**(") && part.endsWith(")**")) {
           return (
-            <span key={key} className="font-bold italic text-gray-950 text-sm md:text-lg block">
+            <span key={key} className="hidden">
+              {part.slice(3, -3)} {/* Removes **( and )** */}
+            </span>
+          );
+        } else if (part.startsWith("***") && part.endsWith("***")) {
+          return (
+            <span
+              key={key}
+              className="font-bold italic text-gray-950 text-sm md:text-lg block"
+            >
               {part.slice(3, -3)}
             </span>
           );
         } else if (part.startsWith("**") && part.endsWith("**")) {
           return (
-            <span key={key} className="font-bold text-gray-950 text-sm md:text-lg block mb-2">
+            <span
+              key={key}
+              className="font-bold text-gray-950 text-sm md:text-lg block mb-2"
+            >
               {part.slice(2, -2)}
             </span>
           );
         } else if (part.startsWith("*") && part.endsWith("*")) {
           return (
-            <span key={key} className="italic text-gray-700">
+            <span key={key} className="text-black font-semibold">
+              {part.slice(1, -1)}
+            </span>
+          );
+        } else if (part.startsWith('"') && part.endsWith('"')) {
+          return (
+            <span key={key} className="text-gray-800 font-semibold">
               {part.slice(1, -1)}
             </span>
           );
         }
-  
+
         return part;
       });
-  
+
       return <p key={lineIndex}>{parts}</p>;
     });
-  
+
     return formattedMessage;
   };
-  
-  
 
   // Add this to your component
   useEffect(() => {
@@ -308,6 +331,19 @@ const ChatUI = () => {
         theme="dark"
         transition={Bounce}
         toastClassName="text-sm"
+      />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
       />
       <CreditCounter credits={credits} />
 
