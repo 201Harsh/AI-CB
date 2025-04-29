@@ -157,7 +157,7 @@ const Profile = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-300">Active Sessions</span>
-                <span className="text-yellow-400 font-bold">3</span>
+                <span className="text-yellow-400 font-bold">1</span>
               </div>
             </div>
           </div>

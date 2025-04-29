@@ -81,11 +81,27 @@ const ChatUI = () => {
           const AIResponse = { text: response.data.response, sender: "Ai" };
           setMessages((prevMessages) => [...prevMessages, AIResponse]);
 
+        if (response.status === 500){
+          toast.error("Server Error", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+        }
+
           // Optionally: You can refresh the credit after each message if needed
           getCredits(); // This ensures the frontend reflects the latest credit balance
         }
       } catch (error) {
-        if (error.response.status === 400) {
+        const status = error?.response?.status;
+
+        if (status === 400) {
           toast.error("You have reached your credit limit.", {
             position: "top-center",
             autoClose: 5000,
@@ -97,11 +113,39 @@ const ChatUI = () => {
             theme: "dark",
             transition: Bounce,
           });
+      
           setTimeout(() => {
             Navigate("/pricing");
           }, 5000);
           return;
         }
+      
+        if (status === 500) {
+          toast.error("Server error occurred. Please try again later.", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+          return;
+        }
+      
+        toast.error("Something went wrong. Please try again.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
         // Handle error gracefully if needed
       } finally {
         setLoading(false); // Reset loading state after the response

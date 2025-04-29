@@ -130,7 +130,7 @@ const Home = () => {
                 <span className="ml-2 text-xl font-bold text-yellow-400">
                   EmoAI
                 </span>
-                <Bars3Icon className="h-8 w-8 text-white ml-auto cursor-pointer md:hidden" />
+                <Bars3Icon className="h-8 w-8 text-white ml-2 cursor-pointer md:hidden" />
               </div>
             </div>
           </header>
