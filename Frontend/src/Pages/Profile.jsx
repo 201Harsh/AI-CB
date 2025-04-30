@@ -19,7 +19,7 @@ const Profile = () => {
     name: "John AIUser",
     email: "john.aiuser@example.com",
     joinDate: "January 2023",
-    avatar: "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=John",
+    avatar: "https://sdmntpreastus2.oaiusercontent.com/files/00000000-86bc-61f6-a139-21a3234d9810/raw?se=2025-04-30T07%3A54%3A38Z&sp=r&sv=2024-08-04&sr=b&scid=70f09474-c206-5e2c-ae8e-2c48a9e2194a&skoid=ac1d63ad-0c69-4017-8785-7a50eb04382c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-30T04%3A48%3A01Z&ske=2025-05-01T04%3A48%3A01Z&sks=b&skv=2024-08-04&sig=70KYg6DgniQCiAR6i8oU43N3jHQFN/xUrPDH9b9FORw%3D",
     totalQueries: 128,
     bio: "AI enthusiast exploring the boundaries of machine intelligence and human creativity.",
     membership: "Premium",
@@ -100,7 +100,7 @@ const Profile = () => {
                 <img
                   src={userData.avatar}
                   alt="Profile"
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-center object-cover"
                 />
               </div>
               <button className="absolute bottom-0 right-0 bg-yellow-500 p-2 rounded-full hover:bg-yellow-600 transition duration-200">
