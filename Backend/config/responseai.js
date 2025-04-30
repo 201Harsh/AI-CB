@@ -306,7 +306,7 @@ AI: *[This device only reset]*
 Other devices remain unaffected 📱≠💻" `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash", // Ensure this is a valid model ID for your version
+      model: "gemini-2.0-flash",
       contents: [
         {
           role: "user",
