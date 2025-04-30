@@ -9,9 +9,10 @@ import {
   BackwardIcon,
 } from "@heroicons/react/24/outline";
 import axios from "../Config/Axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import { userDataContext } from "../Context/UserContext";
 
 const Profile = () => {
   // Dummy data - Replace with real data from backend
@@ -19,13 +20,15 @@ const Profile = () => {
     name: "John AIUser",
     email: "john.aiuser@example.com",
     joinDate: "January 2023",
-    avatar: "https://sdmntpreastus2.oaiusercontent.com/files/00000000-86bc-61f6-a139-21a3234d9810/raw?se=2025-04-30T07%3A54%3A38Z&sp=r&sv=2024-08-04&sr=b&scid=70f09474-c206-5e2c-ae8e-2c48a9e2194a&skoid=ac1d63ad-0c69-4017-8785-7a50eb04382c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-30T04%3A48%3A01Z&ske=2025-05-01T04%3A48%3A01Z&sks=b&skv=2024-08-04&sig=70KYg6DgniQCiAR6i8oU43N3jHQFN/xUrPDH9b9FORw%3D",
+    avatar: "https://randomuser.me/api/portraits/men/9.jpg",
     totalQueries: 128,
     bio: "AI enthusiast exploring the boundaries of machine intelligence and human creativity.",
     membership: "Premium",
   };
 
   const [user, setuser] = useState("");
+
+  const {rescount, setrescount} = useContext(userDataContext);
 
   const Navigate = useNavigate();
 
@@ -152,7 +155,7 @@ const Profile = () => {
               <div className="flex justify-between items-center">
                 <span className="text-gray-300">Total Queries</span>
                 <span className="text-yellow-400 font-bold">
-                  {userData.totalQueries}
+                  {rescount}
                 </span>
               </div>
               <div className="flex justify-between items-center">

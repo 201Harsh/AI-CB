@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import {
   PaperAirplaneIcon,
   SpeakerWaveIcon,
@@ -9,6 +9,7 @@ import axios from "../Config/Axios";
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import CreditCounter from "../Components/CreditCounter";
 import { useNavigate } from "react-router-dom";
+import { userDataContext } from "../Context/UserContext";
 
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
@@ -20,8 +21,15 @@ const ChatUI = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voices, setVoices] = useState([]);
   const [showFollowModal, setShowFollowModal] = useState(false);
+  const [ResponseCount, setResponseCount] = useState(0);
 
   const Navigate = useNavigate();
+
+  const { rescount, setrescount } = useContext(userDataContext);
+
+  useEffect(() => {
+    setrescount(ResponseCount);
+  }, [ResponseCount]);
 
   // Scroll to the bottom when new messages are added
   useEffect(() => {
@@ -89,8 +97,8 @@ const ChatUI = () => {
         if (response.status === 200) {
           setIsRes(true);
           const AIResponse = { text: response.data.response, sender: "Ai" };
-          console.log(AIResponse.text);
           setMessages((prevMessages) => [...prevMessages, AIResponse]);
+          setResponseCount((prev) => prev + 1);
 
           if (response.status === 500) {
             toast.error("Server Error", {
@@ -115,10 +123,10 @@ const ChatUI = () => {
         if (status === 400) {
           toast.error("You have reached your credit limit..", {
             position: "bottom-left",
-            autoClose: 5000,
+            autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: false,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "dark",
@@ -132,9 +140,9 @@ const ChatUI = () => {
         }
 
         if (status === 500) {
-          toast.error("AI is busy. Please wait and try again!", {
+          toast.error("AI is busy. Server Error. try again!", {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
