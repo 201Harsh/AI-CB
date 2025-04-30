@@ -272,7 +272,7 @@ const Home = () => {
                   ~ AI Powered 💪 By EndGaming{" "}
                   <img
                     src="https://cdn.pixabay.com/animation/2024/04/27/19/29/19-29-06-468_512.gif"
-                    className="h-10 w-10 inline-block rotate-45"
+                    className="h-10 w-10 inline-block rotate-46"
                     alt="Rocket animation"
                   />
                 </h4>
@@ -281,7 +281,7 @@ const Home = () => {
                     <button
                       onClick={() => setIsResGen(true)}
                       type="submit"
-                      className="bg-gray-600 md:w-96 w-full hover:bg-gray-700 text-gray-100 px-4 py-2 
+                      className="bg-gray-700 md:w-96 w-full hover:bg-gray-800 hover:ring-1 ring-yellow-400 text-yellow-400 font-semibold px-4 py-2 
                     rounded-lg transition duration-200 flex items-center justify-center
                     active:scale-95 cursor-pointer"
                     >
