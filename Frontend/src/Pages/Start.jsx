@@ -398,7 +398,7 @@ export default function Landing() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  to="/register"
+                  to="/authprompt"
                   className="relative bg-gradient-to-r from-yellow-400 to-amber-600 hover:shadow-2xl hover:shadow-yellow-400/30 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 inline-block group"
                 >
                   <span className="relative z-10">Start Emotional Journey</span>
@@ -411,7 +411,7 @@ export default function Landing() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  to="/register"
+                  to="/authprompt"
                   className="relative border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 inline-block"
                 >
                   Try Live Demo
@@ -767,7 +767,7 @@ export default function Landing() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  to="/register"
+                  to="/authprompt"
                   className="relative bg-gradient-to-r from-yellow-400 to-amber-600 hover:shadow-2xl hover:shadow-yellow-400/30 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 inline-block group"
                 >
                   <span className="relative z-10">Get Started - It's Free</span>
@@ -780,7 +780,7 @@ export default function Landing() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  to="/login"
+                  to="/authprompt"
                   className="relative border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 inline-block"
                 >
                   Try Interactive Demo
@@ -881,13 +881,13 @@ export default function Landing() {
                   <LinkedInIcon className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/201Harsh"
                   className="text-gray-400 hover:text-yellow-400 transition-colors"
                 >
                   <GitHubIcon className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/201harshs/"
                   className="text-gray-400 hover:text-yellow-400 transition-colors"
                 >
                   <InstagramIcon className="h-5 w-5" />

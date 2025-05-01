@@ -13,6 +13,7 @@ import Pricing from "../Pages/Pricing";
 import Payment from "../Pages/Payment";
 import About from "../Pages/About";
 import Features from "../Pages/Features";
+import AuthPrompt from "../Pages/AuthPrompt";
 
 const PageRoute = () => {
   return (
@@ -37,6 +38,7 @@ const PageRoute = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/authprompt" element={<AuthPrompt />} />
           <Route path="/features" element={<Features />} />
           <Route path="/payment/:planId" element={<Payment />} />
         </Routes>
