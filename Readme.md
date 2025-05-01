@@ -78,14 +78,16 @@ flowchart TD
 
 ## 🛠 Tech Stack
 
-**Frontend**  
+**Frontend** 
+
 ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
 
 ![Tailwind](https://img.shields.io/badge/-Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white)
 
 ![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white)
 
-**Backend**  
+**Backend** 
+
 ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node-dot-js&logoColor=white)
 
 ![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white)
@@ -94,12 +96,14 @@ flowchart TD
 
 
 **Security**  
+
 ![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens&logoColor=white)
 
 ![Bcrypt](https://img.shields.io/badge/-Bcrypt-0042AA?logo=bcrypt&logoColor=white)
 
 # ✨ API Usage:
-- EndGaming AI API (or you can use other AI API)
+
+## EndGaming AI API (or you can use other AI API)
 
 ### 🔧 Configuration
 
