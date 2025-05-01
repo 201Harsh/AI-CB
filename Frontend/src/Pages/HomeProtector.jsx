@@ -43,8 +43,8 @@ const HomeProtector = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="h-screen w-screen bg-gray-900">
-        <h1 className="text-3xl font-bold text-yellow-400">Loading....</h1>
+      <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
+        <h1 className="text-5xl font-bold text-yellow-400">Loading....</h1>
       </div>
     );
   }
