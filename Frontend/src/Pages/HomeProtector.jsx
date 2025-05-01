@@ -32,7 +32,7 @@ const HomeProtector = ({ children }) => {
       } catch (error) {
         localStorage.removeItem("token");
         localStorage.removeItem("name");
-        navigate("/register");
+        navigate("/home");
       } finally {
         setIsLoading(false);
       }

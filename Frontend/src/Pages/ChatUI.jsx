@@ -363,7 +363,7 @@ const ChatUI = () => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900/50 pt-2">
+    <div className="h-full font-poppins flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900/50 pt-2">
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
