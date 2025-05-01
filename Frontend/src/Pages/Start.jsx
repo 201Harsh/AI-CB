@@ -208,11 +208,11 @@ const stats = [
     value: (
       <div className="flex items-end">
         <CountUp
-          from={10}
-          to={10000}
+          from={0}
+          to={5000}
           separator=","
           direction="up"
-          duration={1}
+          duration={3}
           className="count-up-text"
         />
         <span className="text-yellow-400">+</span>
@@ -225,10 +225,10 @@ const stats = [
       <div className="flex items-end">
         <CountUp
           from={0}
-          to={250}
+          to={350}
           separator=","
           direction="up"
-          duration={1}
+          duration={2}
           className="count-up-text"
         />
         <span className="text-yellow-400">+</span>
@@ -674,7 +674,8 @@ export default function Landing() {
                     </li>
                   ))}
                 </ul>
-                <Link to="/pricing"
+                <Link
+                  to="/pricing"
                   className={`w-full py-3 flex items-center justify-center rounded-lg font-semibold transition-all ${
                     plan.popular
                       ? "bg-gradient-to-r from-yellow-400 to-amber-600 text-gray-900 hover:shadow-lg hover:shadow-yellow-400/30"
@@ -690,9 +691,9 @@ export default function Landing() {
           <div className="text-center mt-12 text-gray-400">
             <p>
               Need something custom?{" "}
-              <a href="#" className="text-yellow-400 hover:underline">
+              <Link to="/contact" className="text-yellow-400 hover:underline">
                 Contact our sales team
-              </a>
+              </Link>
             </p>
           </div>
         </div>

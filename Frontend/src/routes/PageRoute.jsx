@@ -15,6 +15,7 @@ import About from "../Pages/About";
 import Features from "../Pages/Features";
 import AuthPrompt from "../Pages/AuthPrompt";
 import Careers from "../Pages/Carrers";
+import Contact from "../Pages/Contact";
 
 const PageRoute = () => {
   return (
@@ -42,6 +43,7 @@ const PageRoute = () => {
           <Route path="/authprompt" element={<AuthPrompt />} />
           <Route path="/features" element={<Features />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/payment/:planId" element={<Payment />} />
         </Routes>
       </BrowserRouter>

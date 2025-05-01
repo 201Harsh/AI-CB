@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  UserIcon,
-  ArrowRightIcon,
-  ArrowLeftIcon,
-} from "@heroicons/react/24/outline";
+import { UserIcon, ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function AuthPrompt() {
   return (
@@ -13,16 +9,15 @@ export default function AuthPrompt() {
           <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 mb-6">
             <UserIcon className="h-8 w-8 text-gray-900" />
           </div>
-
+          
           <h2 className="text-3xl font-bold text-yellow-400 mb-4">
             Join Our Community
           </h2>
-
+          
           <p className="text-gray-300 mb-8">
-            To access all features and personalize your experience, please
-            create an account or login if you already have one.
+            To access all features and personalize your experience, please create an account or login if you already have one.
           </p>
-
+          
           <div className="space-y-4">
             <Link
               to="/register"
@@ -33,7 +28,7 @@ export default function AuthPrompt() {
               </span>
               Create Account
             </Link>
-
+            
             <Link
               to="/login"
               className="group relative w-full flex justify-center py-3 px-4 border-2 border-yellow-400 text-lg font-medium rounded-full text-yellow-400 hover:bg-yellow-400/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200"
@@ -44,8 +39,17 @@ export default function AuthPrompt() {
               I Already Have an Account
             </Link>
           </div>
+          
+          <div className="mt-6 text-center">
+            <Link 
+              to="/contact" 
+              className="text-gray-400 hover:text-yellow-400 text-sm transition-colors"
+            >
+              Need Help? Contact Us
+            </Link>
+          </div>
         </div>
-
+        
         <div className="bg-gray-800/50 px-6 py-4 text-center">
           <p className="text-xs text-gray-400">
             By continuing, you agree to our Terms of Service and Privacy Policy
