@@ -515,7 +515,7 @@ const ChatUI = () => {
               autoFocus
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Type your message..."
+              placeholder="Message EmoAI..."
               className="flex-1 bg-gray-800 text-yellow-400 rounded-lg px-3 py-2 border border-yellow-400 
                      focus:outline-none focus:ring-1 focus:ring-yellow-500
                      placeholder:text-yellow-400/50 text-sm"

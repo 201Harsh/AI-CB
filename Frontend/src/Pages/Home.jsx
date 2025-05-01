@@ -141,7 +141,7 @@ const Home = () => {
           />
         )}
 
-        <div className="flex h-full w-full md:pt-4 pt-16 relative justify-between">
+        <div className="flex h-full w-full md:pt-2 pt-16 relative justify-between">
           {/* Sidebar */}
           <div
             className={`fixed md:relative z-40 top-0 left-0 h-full bg-gray-800 text-white transition-transform duration-300
