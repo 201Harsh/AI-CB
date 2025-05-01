@@ -3,7 +3,7 @@ const UserModel = require("../models/user.model");
 
 module.exports.genResponse = async (req, res) => {
   try {
-    const { email, name, prompt } = req.body;
+    const { email, name, prompt, chatHistorySave } = req.body;
 
     if (!prompt) {
       return res.status(400).json({
@@ -31,7 +31,7 @@ module.exports.genResponse = async (req, res) => {
     // Step 3: Save the updated user record in the database
     await user.save();
 
-    const response = await ai(prompt, name);
+    const response = await ai(prompt, name, chatHistorySave);
     res.status(200).json({
       response,
     });

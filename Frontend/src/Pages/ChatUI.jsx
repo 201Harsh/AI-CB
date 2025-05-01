@@ -22,6 +22,7 @@ const ChatUI = () => {
   const [voices, setVoices] = useState([]);
   const [showFollowModal, setShowFollowModal] = useState(false);
   const [ResponseCount, setResponseCount] = useState(0);
+  const [chatHistorySave, setchatHistorySave] = useState([]);
 
   const Navigate = useNavigate();
 
@@ -68,6 +69,7 @@ const ChatUI = () => {
           prompt: inputMessage,
           email,
           name,
+          chatHistorySave,
         });
 
         // Check if credits are available, using the backend logic
@@ -90,6 +92,9 @@ const ChatUI = () => {
             theme: "dark",
             transition: Bounce,
           });
+          setTimeout(() => {
+            Navigate("/pricing");
+          }, 5000);
           return;
         }
 
@@ -99,6 +104,18 @@ const ChatUI = () => {
           const AIResponse = { text: response.data.response, sender: "Ai" };
           setMessages((prevMessages) => [...prevMessages, AIResponse]);
           setResponseCount((prev) => prev + 1);
+
+          const completedChat = {
+            user: inputMessage,
+            ai: response.data.response,
+            timestamp: new Date().toISOString(),
+          };
+
+          setchatHistorySave((prevHistory) => {
+            const updatedHistory = [...prevHistory, completedChat];
+            // Log after updating
+            return updatedHistory;
+          });
 
           if (response.status === 500) {
             toast.error("Server Error", {
@@ -215,6 +232,13 @@ const ChatUI = () => {
               {part.slice(3, -3)} {/* Removes **( and )** */}
             </span>
           );
+        }
+        if (part === "*[object Object]*") {
+          return (
+            <span key={key} className="hidden">
+              {/* Hides the entire thing */}
+            </span>
+          );
         } else if (part.startsWith("***") && part.endsWith("***")) {
           return (
             <span
@@ -242,6 +266,12 @@ const ChatUI = () => {
         } else if (part.startsWith('"') && part.endsWith('"')) {
           return (
             <span key={key} className="text-gray-800 font-semibold">
+              {part.slice(1, -1)}
+            </span>
+          );
+        } else if (part.startsWith("*[") && part.endsWith("*]")) {
+          return (
+            <span key={key} className="text-gray-800 hidden">
               {part.slice(1, -1)}
             </span>
           );
@@ -334,20 +364,6 @@ const ChatUI = () => {
 
   return (
     <div className="h-full flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900/50 pt-2">
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Bounce}
-        toastClassName="text-sm"
-      />
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

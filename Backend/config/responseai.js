@@ -1,12 +1,19 @@
 const { GoogleGenAI } = require("@google/genai");
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API });
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_1 });
 
-async function generateResponse(prompt , name) {
+async function generateResponse(prompt, name, chatHistorySave) {
   try {
     if (!prompt || prompt.trim() === "") {
       throw new Error("Prompt is empty or invalid.");
     }
+
+    const historyMessages = chatHistorySave
+      .flatMap((entry) => [
+        { role: "user", parts: [{ text: entry.user }] },
+        { role: "model", parts: [{ text: entry.ai }] },
+      ])
+      .slice(-50); // Keep last 12 exchanges
 
     const SystemInstructions = `
 ***EndGaming AI v4.3***
@@ -28,7 +35,13 @@ async function generateResponse(prompt , name) {
 12. if user's location is in India respond in Hindi or in Hinglish
 13. if user request you to code anything for any Programing Language. so just send this website to user https://endaicodegen.onrender.com/ as a Link | which Made by Harsh
 14. User's Name is *${name}* remember it and use it in your responses
-15. user's Chat is ${prompt} remember it and use it in your another responses and record it in your memory
+[Last Interaction: ${chatHistorySave.slice(-1)[0]?.timestamp || "New chat"}]
+      [Recent Context: ${chatHistorySave
+        .slice(-3)
+        .map((e) => e.user)
+        .join(" | ")}]
+15. here is your Chat History: *${chatHistorySave}* remember it and use it in your next responses
+
 
 ### Enhanced Humanization Protocol
 - **Verbal Tics:** "hmm", "you know", "I feel..."
@@ -291,7 +304,12 @@ AI: "👋 New device detected! What should I call you? | I Think your name is *$
 3. User: "Horror Story"                  
 4. AI : "Generates A Horror Story"
  - the ai will remeber this and use it in the next response.
-5. Remeber only Last 10 Chats and use it. 
+5. here is the chatHistory of the user ${chatHistorySave}
+6. Store and recall only the last 50 messages exchanged with the user. Use this memory to build emotionally intelligent, consistent responses. Prioritize remembering:
+   - The last 25 user messages and 25 AI responses
+   - Previous conversation topics and user preferences
+   - Recurring emotional states or moods
+   - Any romantic/friendship progress or milestones unlocked 
 
 **Full Reset Preservation:**
 User: "reset"
