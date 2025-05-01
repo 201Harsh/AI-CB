@@ -12,27 +12,27 @@ import { Link } from "react-router-dom";
 
 const teamMembers = [
   {
-    name: "Harsh Singh",
+    name: "Harsh",
     role: "Founder & CEO",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: "https://avatars.githubusercontent.com/u/160850571?v=4",
     bio: "AI enthusiast with 8 years of experience in emotional computing and natural language processing."
   },
   {
-    name: "Priya Patel",
+    name: "Harsh",
     role: "Lead Psychologist",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: "https://randomuser.me/api/portraits/men/20.jpg",
     bio: "Clinical psychologist specializing in human-AI interaction and emotional intelligence modeling."
   },
   {
-    name: "Rahul Verma",
+    name: "Harsh",
     role: "CTO",
-    image: "https://randomuser.me/api/portraits/men/67.jpg",
+    image: "https://randomuser.me/api/portraits/men/27.jpg",
     bio: "Former Google engineer with expertise in large language models and machine learning infrastructure."
   },
   {
-    name: "Ananya Gupta",
+    name: "Harsh",
     role: "UX Designer",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
+    image: "https://randomuser.me/api/portraits/men/18.jpg",
     bio: "Human-centered design specialist focused on creating intuitive emotional interfaces."
   }
 ];

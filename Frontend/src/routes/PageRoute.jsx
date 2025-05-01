@@ -14,6 +14,7 @@ import Payment from "../Pages/Payment";
 import About from "../Pages/About";
 import Features from "../Pages/Features";
 import AuthPrompt from "../Pages/AuthPrompt";
+import Careers from "../Pages/Carrers";
 
 const PageRoute = () => {
   return (
@@ -40,6 +41,7 @@ const PageRoute = () => {
           <Route path="/about" element={<About />} />
           <Route path="/authprompt" element={<AuthPrompt />} />
           <Route path="/features" element={<Features />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/payment/:planId" element={<Payment />} />
         </Routes>
       </BrowserRouter>
