@@ -270,34 +270,37 @@ sequenceDiagram
 
 # 📸 Screenshots
 
-### Screenshot Availiable (This Is only a Illustration of the application)
+- Screenshot Availiable (This Is only a Illustration of the application)
 
-- Starting Page 
+### Starting Page 
 
 <img src="./Screenshots/Screenshot (19).png"/>
+<img src="./Screenshots/start.png"/>
+<img src="./Screenshots/start1.png"/>
+<img src="./Screenshots/start2.png"/>
 
-- Register Page
+### Register Page
 
 <img src="./Screenshots/Screenshot (20).png"/>
 
--Login Page
+### Login Page
 
 <img src="./Screenshots/Screenshot (21).png"/>
 
-- Feature Page
+### Feature Page
 
 <img src="./Screenshots/Screenshot (24).png"/>
 
-- Profile Page
+### Profile Page
 
 <img src="./Screenshots/Screenshot (23).png"/>
 
-- Pricing Page 
+### Pricing Page 
 
 <img src="./Screenshots/Screenshot (25).png"/>
 
 
-- Chatting Page
+### Chatting Page
 
 <img src="./Screenshots/Screenshot (22).png"/>
 
