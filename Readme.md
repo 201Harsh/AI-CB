@@ -23,6 +23,7 @@ An AI-powered chatbot web application with emotional intelligence, built using t
 - [API Integration](#-api-integration)
 - [Credit System](#-credit-system)
 - [Security](#-security)
+- [Screenshots](#-screenshots)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -59,23 +60,6 @@ User Emotion	AI Response Pattern	Sample Response
 
 ---
 
-
-# 🧠 Core Architecture
-
-## � System Architecture
-
-```mermaid
-flowchart TD
-    A[Client] -->|HTTPS| B[API Gateway]
-    B --> C[Auth Service]
-    B --> D[Chat Service]
-    B --> E[Credit Service]
-    C --> F[(MongoDB Users)]
-    D --> G[AI Provider]
-    E --> H[(MongoDB Credits)]
-```
----
-
 ## 🛠 Tech Stack
 
 **Frontend** 
@@ -101,60 +85,23 @@ flowchart TD
 
 ![Bcrypt](https://img.shields.io/badge/-Bcrypt-0042AA?logo=bcrypt&logoColor=white)
 
-# ✨ API Usage:
-
-## EndGaming AI API (or you can use other AI API)
-
-### 🔧 Configuration
-
-**Create .env in /backend:**
-
-``` bash
-PORT = 4000
-MONGO_URI = mongodb://localhost:27017/emoai
-JWT_SECRET = your_secure_secret_here
-ENDG_API_KEY = your_api_key_here
-INITIAL_CREDITS = 10 # Default starting credits
-```
-
-### 📡 API Integration
-``` bash 
-// Example API call to EndGaming AI
-app.post('/api/chat', async (req, res) => {
-  const { prompt, emotion } = req.body;
-  
-  const response = await axios.post('https://api.endgaming.ai/v4/)chat', {
-    prompt,
-    emotion,
-    apiKey: process.env.ENDG_API_KEY
-  });
-res.json(response.data);
-});
-
-```
 ---
 
-# 💳 Credit System
-- New users receive 10 free credits
-- Credit deduction workflow:
 
-```mermaid 
-sequenceDiagram
-  User->>+Backend: Send Message
-  Backend->>Database: Check Credits
-  alt Credits > 0
-    Database->>Backend: Credit Available
-    Backend->>AI API: Forward Request
-    AI API->>Backend: Return Response
-    Backend->>Database: Deduct Credit
-    Backend->>User: Send Response
-  else Credits = 0
-    Database->>Backend: No Credits
-    Backend->>User: Error Response
-  end
+# 🧠 Core Architecture
+
+## � System Architecture
+
+```mermaid
+flowchart TD
+    A[Client] -->|HTTPS| B[API Gateway]
+    B --> C[Auth Service]
+    B --> D[Chat Service]
+    B --> E[Credit Service]
+    C --> F[(MongoDB Users)]
+    D --> G[AI Provider]
+    E --> H[(MongoDB Credits)]
 ```
-
-
 ---
 
 # 🚀 Getting Started
@@ -221,6 +168,39 @@ npm run dev
 
 ---
 
+# ✨ API Usage:
+
+## EndGaming AI API (or you can use other AI API)
+
+### 🔧 Configuration
+
+**Create .env in /backend:**
+
+``` bash
+PORT = 4000
+MONGO_URI = mongodb://localhost:27017/emoai
+JWT_SECRET = your_secure_secret_here
+ENDG_API_KEY = your_api_key_here
+INITIAL_CREDITS = 10 # Default starting credits
+```
+
+### 📡 API Integration
+``` javascript
+// Example API call to EndGaming AI
+app.post('/api/chat', async (req, res) => {
+  const { prompt, emotion } = req.body;
+  
+  const response = await axios.post('https://api.endgaming.ai/v4/)chat', {
+    prompt,
+    emotion,
+    apiKey: process.env.ENDG_API_KEY
+  });
+res.json(response.data);
+});
+
+```
+---
+
 # 📦 API Integration
 
 #### Using Google Gemini or a similar Google AI API:
@@ -231,6 +211,27 @@ npm run dev
 
 - Credit is deducted per request
 
+---
+
+# 💳 Credit System
+- New users receive 10 free credits
+- Credit deduction workflow:
+
+```mermaid 
+sequenceDiagram
+  User->>+Backend: Send Message
+  Backend->>Database: Check Credits
+  alt Credits > 0
+    Database->>Backend: Credit Available
+    Backend->>AI API: Forward Request
+    AI API->>Backend: Return Response
+    Backend->>Database: Deduct Credit
+    Backend->>User: Send Response
+  else Credits = 0
+    Database->>Backend: No Credits
+    Backend->>User: Error Response
+  end
+```
 ---
 
 # 🧮 Credit System (Example)
@@ -269,7 +270,36 @@ npm run dev
 
 # 📸 Screenshots
 
-- no Screenshot Availiable
+### Screenshot Availiable (This Is only a Illustration of the application)
+
+- Starting Page 
+
+<img src="./Screenshots/Screenshot (19).png"/>
+
+- Register Page
+
+<img src="./Screenshots/Screenshot (20).png"/>
+
+-Login Page
+
+<img src="./Screenshots/Screenshot (21).png"/>
+
+- Feature Page
+
+<img src="./Screenshots/Screenshot (24).png"/>
+
+- Profile Page
+
+<img src="./Screenshots/Screenshot (23).png"/>
+
+- Pricing Page 
+
+<img src="./Screenshots/Screenshot (25).png"/>
+
+
+- Chatting Page
+
+<img src="./Screenshots/Screenshot (22).png"/>
 
 ---
 
@@ -286,7 +316,34 @@ npm run dev
 - 🌐 Multi-language Support
 
 # 📃 License
-- MIT License
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+```text
+MIT License
+
+Copyright (c) 2025 Harsh (@201Harsh)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+---
+
 
 ## 💬 Acknowledgments
 
@@ -300,22 +357,27 @@ npm run dev
 
 - Express
 
+---
+
 # 🤝 Contributing
-Fork the Project
+- Fork the Project
 
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
+- Create your Feature Branch (git checkout -b feature/AmazingFeature)
 
-Commit your Changes (git commit -m 'Add some AmazingFeature')
+- Commit your Changes (git commit -m 'Add some AmazingFeature')
 
-Push to the Branch (git push origin feature/AmazingFeature)
+- Push to the Branch (git push origin feature/AmazingFeature)
 
-Open a Pull Request
+- Open a Pull Request
+
+---
 
 ## 📮 Contact & Support
 - Lead Developer: Harsh (@201Harsh)
 - GitHub : [201Harsh](https://github.com/201Harsh) | Instagram : [201harshs](https://www.instagram.com/201harshs/)
 
 - Support Portal: support@endgamingai2@gmail.com
+
 ---
 
 ## Made With ❤️ by Harsh
