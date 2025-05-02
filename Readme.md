@@ -15,6 +15,7 @@ An AI-powered chatbot web application with emotional intelligence, built using t
 ---
 
 ## 🎛️ Table of Contents
+
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
 - [System Architecture](#-system-architecture)
@@ -33,36 +34,58 @@ An AI-powered chatbot web application with emotional intelligence, built using t
 
 ## 🌟 Key Features
 
-| Feature | Description |
-|---------|-------------|
-| 🧠 **AI-Powered Chat** | Integration with EndGaming AI for intelligent conversations |
-| 🔒 **JWT Authentication** | Secure user authentication with token refresh |
-| 💳 **Credit System** | Usage-based credit management (1 credit/request) |
-| 🎭 **Emotion Adaptation** | Dynamic responses based on detected user mood |
-| 📊 **User Analytics** | Track usage patterns and credit consumption |
-| ⚡ **Real-Time UI** | Interactive chat interface with React |
+| Feature                   | Description                                                 |
+| ------------------------- | ----------------------------------------------------------- |
+| 🧠 **AI-Powered Chat**    | Integration with EndGaming AI for intelligent conversations |
+| 🔒 **JWT Authentication** | Secure user authentication with token refresh               |
+| 💳 **Credit System**      | Usage-based credit management (1 credit/request)            |
+| 🎭 **Emotion Adaptation** | Dynamic responses based on detected user mood               |
+| 📊 **User Analytics**     | Track usage patterns and credit consumption                 |
+| ⚡ **Real-Time UI**       | Interactive chat interface with React                       |
 
 ### Emotion Response Matrix
-| User Emotion | Response Style | Example Response |
-|-------------|----------------|------------------|
-| 😠 Angry    | Calm + Solution-Oriented | "Let's work through this together..." |
-| 😔 Sad      | Empathetic + Encouraging | "I'm here to listen..." |
-| 😃 Happy    | Enthusiastic + Playful    | "That's fantastic! 🎉..." |
+
+| User Emotion | Response Style           | Example Response                      |
+| ------------ | ------------------------ | ------------------------------------- |
+| 😠 Angry     | Calm + Solution-Oriented | "Let's work through this together..." |
+| 😔 Sad       | Empathetic + Encouraging | "I'm here to listen..."               |
+| 😃 Happy     | Enthusiastic + Playful   | "That's fantastic! 🎉..."             |
 
 ## 🌈 Emotional Response System
 
 Mood Adaptation Matrix
-User Emotion	AI Response Pattern	Sample Response
-- 😠 Angry	Calm + Solution-Oriented	"Let's workthrough this..."
-- 😔 Sad	Empathetic + Encouraging	"I'm here for you..."
-- 😃 Happy	Enthusiastic + Playful	"That's awesome! 🎉..."
+User Emotion AI Response Pattern Sample Response
 
+- 😠 Angry Calm + Solution-Oriented "Let's workthrough this..."
+- 😔 Sad Empathetic + Encouraging "I'm here for you..."
+- 😃 Happy Enthusiastic + Playful "That's awesome! 🎉..."
+
+## Visual
+
+```mermaid
+graph TD
+    A[🧠 AI-Powered Chat] --> A1[`Integration with EndGaming AI`]
+    B[🔒 JWT Authentication] --> B1[`Secure login with token refresh`]
+    C[💳 Credit System] --> C1[`1 credit per request`]
+    D[🎭 Emotion Adaptation] --> D1[`Dynamic mood-based replies`]
+    E[📊 User Analytics] --> E1[`Track usage & credits`]
+    F[⚡ Real-Time UI] --> F1[`React-based live chat`]
+
+    subgraph Emotion_Response_Matrix
+        EM1[😠 Angry] --> ER1[`Calm + Solution-Oriented: Let's work through this...`]
+        EM2[😔 Sad] --> ER2[`Empathetic + Encouraging: I'm here to listen...`]
+        EM3[😃 Happy] --> ER3[`Enthusiastic + Playful: That's fantastic! 🎉...`]
+    end
+
+    D --> Emotion_Response_Matrix
+
+```
 
 ---
 
 ## 🛠 Tech Stack
 
-**Frontend** 
+**Frontend**
 
 ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
 
@@ -70,7 +93,7 @@ User Emotion	AI Response Pattern	Sample Response
 
 ![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white)
 
-**Backend** 
+**Backend**
 
 ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node-dot-js&logoColor=white)
 
@@ -78,15 +101,13 @@ User Emotion	AI Response Pattern	Sample Response
 
 ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white)
 
-
-**Security**  
+**Security**
 
 ![JWT](https://img.shields.io/badge/-JWT-000000?logo=json-web-tokens&logoColor=white)
 
 ![Bcrypt](https://img.shields.io/badge/-Bcrypt-0042AA?logo=bcrypt&logoColor=white)
 
 ---
-
 
 # 🧠 Core Architecture
 
@@ -102,6 +123,7 @@ flowchart TD
     D --> G[AI Provider]
     E --> H[(MongoDB Credits)]
 ```
+
 ---
 
 # 🚀 Getting Started
@@ -109,12 +131,12 @@ flowchart TD
 ## 💫 Installation
 
 **Prerequisites**
+
 - Node.js v18+
 
 - MongoDB v6+
 
 - EndGaming API Key
-
 
 ### 1. Clone the Repository
 
@@ -124,6 +146,7 @@ cd ai-cb
 ```
 
 ### 2. Setup Backend
+
 ```bash
 cd Backend
 npm install
@@ -145,6 +168,7 @@ npx nodemon
 ```
 
 ### 3. Setup Frontend
+
 ```bash
 cd Frontend
 npm install
@@ -154,6 +178,7 @@ npm run dev
 ---
 
 # ✨ Usage
+
 - Register a new user
 
 - Login to your account
@@ -176,7 +201,7 @@ npm run dev
 
 **Create .env in /backend:**
 
-``` bash
+```bash
 PORT = 4000
 MONGO_URI = mongodb://localhost:27017/emoai
 JWT_SECRET = your_secure_secret_here
@@ -185,20 +210,21 @@ INITIAL_CREDITS = 10 # Default starting credits
 ```
 
 ### 📡 API Integration
-``` javascript
+
+```javascript
 // Example API call to EndGaming AI
-app.post('/api/chat', async (req, res) => {
+app.post("/api/chat", async (req, res) => {
   const { prompt, emotion } = req.body;
-  
-  const response = await axios.post('https://api.endgaming.ai/v4/)chat', {
+
+  const response = await axios.post("https://api.endgaming.ai/v4/)chat", {
     prompt,
     emotion,
-    apiKey: process.env.ENDG_API_KEY
+    apiKey: process.env.ENDG_API_KEY,
   });
-res.json(response.data);
+  res.json(response.data);
 });
-
 ```
+
 ---
 
 # 📦 API Integration
@@ -214,10 +240,11 @@ res.json(response.data);
 ---
 
 # 💳 Credit System
+
 - New users receive 10 free credits
 - Credit deduction workflow:
 
-```mermaid 
+```mermaid
 sequenceDiagram
   User->>+Backend: Send Message
   Backend->>Database: Check Credits
@@ -232,6 +259,7 @@ sequenceDiagram
     Backend->>User: Error Response
   end
 ```
+
 ---
 
 # 🧮 Credit System (Example)
@@ -279,27 +307,37 @@ sequenceDiagram
 <img src="./Screenshots/start1.png"/>
 <img src="./Screenshots/start2.png"/>
 
+---
+
 ### Register Page 🗒️
 
 <img src="./Screenshots/Screenshot (20).png"/>
 
+---
+
 ### Login Page 🗒️
 
-
 <img src="./Screenshots/Screenshot (21).png"/>
+
+---
 
 ### Feature Page 🎀
 
 <img src="./Screenshots/Screenshot (24).png"/>
 
+---
+
 ### Profile Page 🧑‍🏫
 
 <img src="./Screenshots/Screenshot (23).png"/>
+
+---
 
 ### Pricing Page 💸
 
 <img src="./Screenshots/Screenshot (25).png"/>
 
+---
 
 ### Chatting Page 💬🗣️
 
@@ -346,24 +384,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
----
 
+---
 
 ## 💬 Acknowledgments
 
-- END Gaming AI API
+- MongoDB (Database)
 
-- MongoDB
+- Express (Backend)
 
-- React
+- React (Frontend)
 
-- Node.js
+- Node.js (Server)
 
-- Express
+- END Gaming AI API (AI Use For Emotions)
+
+- Google Gemini AI API (AI Use for Intelligence and Information)
 
 ---
 
 # 🤝 Contributing
+
 - Fork the Project
 
 - Create your Feature Branch (git checkout -b feature/AmazingFeature)
@@ -377,6 +418,7 @@ SOFTWARE.
 ---
 
 ## 📮 Contact & Support
+
 - Lead Developer: Harsh (@201Harsh)
 - GitHub : [201Harsh](https://github.com/201Harsh) | Instagram : [201harshs](https://www.instagram.com/201harshs/)
 
@@ -385,7 +427,3 @@ SOFTWARE.
 ---
 
 ## Made With ❤️ by Harsh
-
-
-
-
