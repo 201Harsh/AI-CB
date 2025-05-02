@@ -7,8 +7,8 @@ import {
   Cog6ToothIcon,
   ChatBubbleLeftIcon,
   CpuChipIcon,
-  StopCircleIcon,
   ChatBubbleOvalLeftEllipsisIcon,
+  StopCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import SplashCursor from "../Animations/SplashCursor";
@@ -16,8 +16,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../Config/Axios";
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import PopUp from "../Components/PopUp";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import ChatUI from "./ChatUI";
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
