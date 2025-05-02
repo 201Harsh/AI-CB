@@ -26,21 +26,52 @@ const Register = () => {
 
     const Newuser = { name, email, password };
 
-    const response = await axios.post("/users/register", Newuser);
+    try {
+      const response = await axios.post("/users/register", Newuser);
 
-    if (response.status === 200) {
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem('otp', response.data.otp);
-      const UserData = response.data.user;
-      localStorage.setItem("name", UserData.name);
-      localStorage.setItem("email", UserData.email);
-      setuser(UserData);
-      Navigate("/otp-verification");
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("otp", response.data.otp);
+        const UserData = response.data.user;
+        localStorage.setItem("name", UserData.name);
+        localStorage.setItem("email", UserData.email);
+        setuser(UserData);
+        Navigate("/otp-verification");
+        setname("");
+        setemail("");
+        setpassword("");
+      }
+    } catch (error) {
+      const errors = error.response?.data?.errors;
+
+      if (Array.isArray(errors)) {
+        errors.forEach((err) => {
+          toast.error(err.msg || err, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+        });
+      } else {
+        toast.error("Something went wrong!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
     }
-
-    setname("");
-    setemail("");
-    setpassword("");
   };
 
   return (
@@ -58,7 +89,7 @@ const Register = () => {
         theme="dark"
         transition={Bounce}
       />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -66,7 +97,7 @@ const Register = () => {
         className="bg-gradient-to-br from-gray-900/50 to-gray-900/100 p-8 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-2xl md:backdrop-blur-xl border border-yellow-400/30"
       >
         <h2 className="text-4xl font-bold text-yellow-400 mb-8 text-center font-[Poppins]">
-          Welcome to EmoAI 
+          Welcome to EmoAI
           <br />
           Join Us
         </h2>

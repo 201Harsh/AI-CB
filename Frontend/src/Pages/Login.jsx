@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { userDataContext } from "../Context/UserContext";
 import axios from "../Config/Axios";
-import { toast, Bounce , ToastContainer } from "react-toastify";
+import { toast, Bounce, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
-
 
 const Login = () => {
   const [email, setemail] = useState("");
@@ -21,33 +20,65 @@ const Login = () => {
     e.preventDefault();
     const usersData = { email, password };
 
-    const response = await axios.post("/users/login", usersData);
+    try {
+      const response = await axios.post("/users/login", usersData);
 
-    if (response.status === 200) {
-      localStorage.setItem("token", response.data.token);
-      const Users = response.data.user;
-      localStorage.setItem("name", Users.name);
-      localStorage.setItem("email", Users.email);
-      setuser(Users);
-      toast.success("🧑 User Login Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        const Users = response.data.user;
+        localStorage.setItem("name", Users.name);
+        localStorage.setItem("email", Users.email);
+        setuser(Users);
+        toast.success("🧑 User Login Successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
 
-      setTimeout(() => {
-        Navigate("/home");
-      }, 2000);
-    }
+        setTimeout(() => {
+          Navigate("/home");
+        }, 2000);
+      }
 
-    setemail("");
-    setpassword("");
+      setemail("");
+      setpassword("");
+    } catch (error) {
+          const errors = error.response?.data?.errors;
+    
+          if (Array.isArray(errors)) {
+            errors.forEach((err) => {
+              toast.error(err.msg || err, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+              });
+            });
+          } else {
+            toast.error("Invalid Credentials", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          }
+        }
   };
 
   return (
@@ -65,7 +96,7 @@ const Login = () => {
         theme="dark"
         transition={Bounce}
       />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
