@@ -218,28 +218,32 @@ const ChatUI = () => {
 
   // Format the AI response to show highlighted text
   const formatMessage = (message) => {
-    const formattedMessage = message.split("\n").map((line, lineIndex) => {
+    const safeMessage = String(message); // Ensures you're working with a string
+
+    const formattedMessage = safeMessage.split("\n").map((line, lineIndex) => {
       const regex =
         /(\*\*\([^)]+\)\*\*|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
 
       const parts = line.split(regex).map((part, partIndex) => {
         const key = `${lineIndex}-${partIndex}`;
 
-        // 💡 Handle **(hidden text)** first so it doesn't get caught by other patterns
-        if (part.startsWith("**(") && part.endsWith(")**")) {
-          return (
-            <span key={key} className="hidden">
-              {part.slice(3, -3)} {/* Removes **( and )** */}
-            </span>
-          );
-        }
         if (part === "*[object Object]*") {
           return (
             <span key={key} className="hidden">
-              {/* Hides the entire thing */}
+              {/* Hides the object */}
             </span>
           );
-        } else if (part.startsWith("***") && part.endsWith("***")) {
+        }
+
+        if (part.startsWith("**(") && part.endsWith(")**")) {
+          return (
+            <span key={key} className="hidden">
+              {part.slice(3, -3)}
+            </span>
+          );
+        }
+
+        if (part.startsWith("***") && part.endsWith("***")) {
           return (
             <span
               key={key}
@@ -266,12 +270,6 @@ const ChatUI = () => {
         } else if (part.startsWith('"') && part.endsWith('"')) {
           return (
             <span key={key} className="text-gray-800 font-semibold">
-              {part.slice(1, -1)}
-            </span>
-          );
-        } else if (part.startsWith("*[") && part.endsWith("*]")) {
-          return (
-            <span key={key} className="text-gray-800 hidden">
               {part.slice(1, -1)}
             </span>
           );
