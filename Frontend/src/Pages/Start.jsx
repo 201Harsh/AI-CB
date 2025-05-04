@@ -19,8 +19,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
-import { StarRating } from "../Context/StarRating";
 import CountUp from "../Components/Countup";
+import { StarRating } from "../Components/StarRating";
 
 const features = [
   {
