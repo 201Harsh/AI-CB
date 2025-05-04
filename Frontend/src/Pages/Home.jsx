@@ -414,7 +414,8 @@ const Home = () => {
                         repeatType: "reverse",
                       }}
                     >
-                      Harsh's AI Assistant is ready to assist you!
+                      <span className="text-yellow-400">Harsh's</span> AI
+                      Assistant is ready to assist you!
                     </motion.span>
                   </motion.h2>
                 </motion.div>
@@ -511,12 +512,18 @@ const Home = () => {
 
                 {/* Footer note */}
                 <motion.div
-                  className="absolute bottom-4 text-gray-500 text-sm"
+                  className="absolute bottom-4 text-gray-300 text-sm"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1 }}
                 >
-                  AI Powered by EndGaming • {new Date().getFullYear()}
+                  AI Powered by{" "}
+                  <span className="text-yellow-400">
+                    <a href="https://endgamingwithharsh.netlify.app/">
+                      EndGaming
+                    </a>
+                  </span>{" "}
+                  • {new Date().getFullYear()}
                 </motion.div>
               </div>
             ) : (

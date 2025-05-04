@@ -285,14 +285,6 @@ const Login = () => {
                   )}
                 </button>
               </div>
-              <div className="flex justify-end mt-2">
-                <button
-                  onClick={ServiceNotAvailable}
-                  className="text-xs text-yellow-400 hover:text-yellow-500 transition-colors"
-                >
-                  Forgot password?
-                </button>
-              </div>
             </motion.div>
 
             {/* Submit button */}

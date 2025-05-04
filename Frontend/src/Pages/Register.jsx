@@ -99,7 +99,7 @@ const Register = () => {
           });
         });
       } else {
-        toast.error("Something went wrong!", {
+        toast.error( error.response?.data?.errors ||"Something went wrong!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -451,7 +451,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-200 hover:text-yellow-500 transition-colors"
+                  className="absolute right-3 cursor-pointer top-1/2 -translate-y-1/2 text-gray-200 hover:text-yellow-500 transition-colors"
                 >
                   {showPassword ? (
                     <EyeSlashIcon className="h-5 w-5" />
@@ -480,7 +480,7 @@ const Register = () => {
                   name="terms"
                   type="checkbox"
                   required
-                  className="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-600 rounded bg-gray-700"
+                  className="focus:ring-yellow-500 h-4 w-4 cursor-pointer text-yellow-600 border-gray-600 rounded bg-gray-700"
                 />
               </div>
               <div className="ml-3 text-sm">
