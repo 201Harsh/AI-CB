@@ -212,7 +212,7 @@ module.exports.genResponse = async (req, res) => {
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
-            border: 2px solid #f59e0b;
+            border: 5px solid #f59e0b;
             position: relative;
             overflow: hidden;
         }
@@ -236,7 +236,7 @@ module.exports.genResponse = async (req, res) => {
             <div class="content">
                 <div class="appreciation-icon">
                 <div class="pulse"></div>
-                <img src="https://randomuser.me/api/portraits/men/11.jpg" class="user-avatar" alt="${
+                <img src="https://randomuser.me/api/portraits/men/7.jpg" class="user-avatar" alt="${
                   name || "User"
                 }'s profile" 
                      onerror="this.onerror=null; this.parentNode.innerHTML='<svg width=\\'36\\' height=\\'36\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'#f59e0b\\' stroke-width=\\'2\\'><path d=\\'M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3\\'></path></svg>'">
@@ -252,11 +252,11 @@ module.exports.genResponse = async (req, res) => {
                     <p style="margin: 0; color: #fbbf24; font-weight: 500;">Did you know?</p>
                     <p style="margin: 8px 0 0 0; color: #d1d5db; font-size: 14px;">You're now part of a community of ${
                       Math.floor(Math.random() * 50000) + 50000
-                    } developers and gamers who are shaping the future of AI in gaming.</p>
+                    } User's who are shaping the future of AI in gaming.</p>
                 </div>
     
                 <p class="testimonial">"EndGaming AI transformed our workflow. What used to take days now takes hours, with even better results."</p>
-                <p style="color: #9ca3af; font-size: 13px; margin-top: 30px;">— <strong style="color: #f59e0b;">Harsh</strong>., EndGaming Founder</p>
+                <p style="color: #9ca3af; font-size: 13px; margin-top: 30px;">— <strong style="color: #f59e0b;">Harsh P</strong> .,  EndGaming Founder</p>
     
                 <div class="divider"></div>
                 
