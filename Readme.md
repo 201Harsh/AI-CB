@@ -317,7 +317,7 @@ sequenceDiagram
 
 ### Login Page 🗒️
 
-<img src="./Screenshots/Screenshot (21).png"/>
+<img src="./Screenshots/Screenshot (18).png"/>
 
 ---
 
@@ -341,7 +341,7 @@ sequenceDiagram
 
 ### Chatting Page 💬🗣️
 
-<img src="./Screenshots/Screenshot (22).png"/>
+<img src="./Screenshots/Screenshot (21).png"/>
 
 ---
 
