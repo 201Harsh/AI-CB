@@ -2,31 +2,38 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    minLenght: [3, "Name must be at least 3 characters long"],
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      minLenght: [3, "Name must be at least 3 characters long"],
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+    },
+    credits: {
+      type: Number,
+      default: 10,
+    },
+    lastCreditRefill: {
+      type: Date,
+      default: Date.now,
+    },
+    emailSent: {
+      type: Boolean,
+      default: false,
+    },
   },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-  },
-  credits: {
-    type: Number,
-    default: 10,
-  },
-  lastCreditRefill: {
-    type: Date,
-    default: Date.now,
-  },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 userSchema.methods.Jwt_Token = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
