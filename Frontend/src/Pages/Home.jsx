@@ -414,7 +414,7 @@ const Home = () => {
                         repeatType: "reverse",
                       }}
                     >
-                      Your AI companion is ready to assist you!
+                      Harsh's AI Assistant is ready to assist you!
                     </motion.span>
                   </motion.h2>
                 </motion.div>

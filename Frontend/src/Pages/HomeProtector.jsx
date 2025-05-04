@@ -7,7 +7,7 @@ import axios from "../Config/Axios";
 const HomeProtector = ({ children }) => {
   const token = localStorage.getItem("token");
   const [isLoading, setIsLoading] = useState(true);
-  const { user, setuser } = useContext(userDataContext);
+  const { User, setUser } = useContext(userDataContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,15 +23,14 @@ const HomeProtector = ({ children }) => {
         });
 
         if (res.status === 200) {
-          setuser(res.data);
+          setUser(res.data);
         } else {
           localStorage.removeItem("token");
           localStorage.removeItem("name");
           navigate("/register");
         }
       } catch (error) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("name");
+        localStorage.clear();
         navigate("/home");
       } finally {
         setIsLoading(false);
@@ -39,7 +38,7 @@ const HomeProtector = ({ children }) => {
     };
 
     checkUser();
-  }, [token, navigate, setuser]);
+  }, [token, navigate, setUser]);
 
   if (isLoading) {
     return (
