@@ -306,9 +306,15 @@ const ChatUI = () => {
       speechSynthesis.cancel();
       setIsSpeaking(false);
     } else {
-      const utterance = new SpeechSynthesisUtterance(text);
+      // Remove emojis from the text before speaking
+      const textWithoutEmojis = text.replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        ""
+      );
+  
+      const utterance = new SpeechSynthesisUtterance(textWithoutEmojis);
       const allVoices = speechSynthesis.getVoices();
-
+  
       // Strict female voice filter - updated to be more precise
       const isFemaleVoice = (voice) => {
         const voiceName = voice.name.toLowerCase();
@@ -325,36 +331,36 @@ const ChatUI = () => {
           voice.gender === "female"
         );
       };
-
+  
       // 1. First try to find an Indian female voice
       let selectedVoice = allVoices.find(
         (voice) =>
           (voice.lang.includes("en-IN") || voice.lang.includes("hi-IN")) &&
           isFemaleVoice(voice)
       );
-
+  
       // 2. If no Indian female, find any female voice
       if (!selectedVoice) {
         selectedVoice = allVoices.find(isFemaleVoice);
       }
-
+  
       // 3. If still no female voice, fallback to first available voice
       selectedVoice = selectedVoice || allVoices[0];
-
+  
       if (selectedVoice) {
         utterance.voice = selectedVoice;
         utterance.lang = selectedVoice.lang || "en-IN";
-
+  
         // Enhanced female voice parameters
-        utterance.rate = 1.05; // Natural speaking pace
-        utterance.pitch = 1.25; // Higher pitch for female voice
-        utterance.volume = 0.9; // Slightly softer volume
+        utterance.rate = 1.5; // Natural speaking pace
+        utterance.pitch = 0.9; // Higher pitch for female voice
+        utterance.volume = 1.9; // Slightly softer volume
       }
-
+  
       utterance.onend = () => {
         setIsSpeaking(false);
       };
-
+  
       speechSynthesis.speak(utterance);
       setIsSpeaking(true);
     }
