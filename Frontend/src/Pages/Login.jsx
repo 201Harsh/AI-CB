@@ -52,7 +52,7 @@ const Login = () => {
 
         setTimeout(() => {
           navigate("/home");
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
       const errors = error.response?.data?.errors;
@@ -297,8 +297,6 @@ const Login = () => {
 
             {/* Submit button */}
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="pt-2"
             >
@@ -338,10 +336,10 @@ const Login = () => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
+                <div className="w-full border-t border-gray-100"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-900/90 text-gray-400">
+                <span className="px-2 bg-gray-900 text-gray-400">
                   Or sign in with
                 </span>
               </div>

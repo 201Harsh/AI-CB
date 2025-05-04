@@ -75,7 +75,7 @@ const ChatUI = () => {
         // Check if credits are available, using the backend logic
         const credit = await getCredits(); // Fetch the current credits from the backend
 
-        if (credits === 5) {
+        if (credits === 6) {
           // Show the follow modal
           setShowFollowModal(true);
         }
@@ -94,7 +94,7 @@ const ChatUI = () => {
           });
           setTimeout(() => {
             Navigate("/pricing");
-          }, 5000);
+          }, 2500);
           return;
         }
 
@@ -152,7 +152,7 @@ const ChatUI = () => {
 
           setTimeout(() => {
             Navigate("/pricing");
-          }, 5000);
+          }, 2500);
           return;
         }
 

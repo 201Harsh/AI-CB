@@ -71,7 +71,7 @@ const OTPVerification = () => {
       });
       setTimeout(() => {
         Navigate("/home");
-      }, 2000);
+      }, 1500);
       localStorage.removeItem("otp");
     } else {
       toast.error("🧑 Invalid OTP", {

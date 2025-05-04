@@ -263,7 +263,7 @@ const Register = () => {
               <SparklesIcon className="h-7 w-7 text-gray-900" />
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">
-              Welcome to Our Platform
+              Welcome to EmoAI
             </h1>
             <p className="text-lg text-gray-300 mb-6">
               Join thousands of users who are already benefiting from our
@@ -542,10 +542,10 @@ const Register = () => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
+                <div className="w-full border-t border-gray-100"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-900/90 text-gray-400">
+                <span className="px-2 bg-gray-900 text-gray-400">
                   Or continue with
                 </span>
               </div>

@@ -28,7 +28,7 @@ export default function AuthPrompt() {
           </div>
           
           <h2 className="text-3xl font-bold text-white mb-3">
-            Welcome Back!
+            Welcome to EmoAI!
           </h2>
           
           <p className="text-gray-300 mb-8 max-w-md mx-auto">
