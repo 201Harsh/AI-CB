@@ -24,7 +24,7 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [splashEnabled, setSplashEnabled] = useState(false);
   const [IsTite, setIsTite] = useState(false);
-  const [showPopup, setShowPopup] = useState(true); // Added popup state
+  const [showPopup, setShowPopup] = useState(false); // Added popup state
   const [username, setusername] = useState("");
   const [IsResGen, setIsResGen] = useState(false);
 
@@ -117,15 +117,11 @@ const Home = () => {
       }, 2000);
     }
   };
-
-  // Initialize popup only once
-  useEffect(() => {
-    const hasSeenPopup = localStorage.getItem("hasSeenWelcome");
-    if (!hasSeenPopup) {
-      setShowPopup(true);
-      localStorage.setItem("hasSeenWelcome", "true");
-    }
-  }, []);
+  
+  const popupcontroller = () => {
+    setShowPopup(true);
+    setIsResGen(true);
+  };
 
   return (
     <>
@@ -489,7 +485,7 @@ const Home = () => {
                       boxShadow: "0 10px 25px -5px rgba(234, 179, 8, 0.3)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsResGen(true)}
+                    onClick={popupcontroller}
                     className="cursor-pointer w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl
           shadow-lg transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden"
                   >

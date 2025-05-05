@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmoAIPreloader from "./EmoAIPreloader";
 
 const AutoRedirect = () => {
   const navigate = useNavigate();
+  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/home"); // If token exists, redirect to home
-    } else {
-      navigate("/start"); // If not, go to landing page
-    }
+    const timer = setTimeout(() => {
+      const token = localStorage.getItem("token");
+      setShowPreloader(false);
+      if (token) {
+        navigate("/home");
+      } else {
+        navigate("/start");
+      }
+    }, 6000); // Optional delay to show the preloader
+
+    return () => clearTimeout(timer);
   }, [navigate]);
 
-  return null;
+  return showPreloader ? <EmoAIPreloader /> : null;
 };
 
 export default AutoRedirect;
