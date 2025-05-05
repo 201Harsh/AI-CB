@@ -218,15 +218,16 @@ const ChatUI = () => {
 
   // Format the AI response to show highlighted text
   const formatMessage = (message) => {
-    const safeMessage = String(message); // Ensures you're working with a string
-
+    const safeMessage = String(message);
+  
     const formattedMessage = safeMessage.split("\n").map((line, lineIndex) => {
+      // Match markdown and anchor tags
       const regex =
-        /(\*\*\([^)]+\)\*\*|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
-
+        /(<a href="[^"]+"[^>]*>[^<]+<\/a>|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
+  
       const parts = line.split(regex).map((part, partIndex) => {
         const key = `${lineIndex}-${partIndex}`;
-
+  
         if (part === "*[object Object]*") {
           return (
             <span key={key} className="hidden">
@@ -234,15 +235,27 @@ const ChatUI = () => {
             </span>
           );
         }
-
-        if (part.startsWith("**(") && part.endsWith(")**")) {
-          return (
-            <span key={key} className="hidden">
-              {part.slice(3, -3)}
-            </span>
-          );
+  
+        // Handle anchor tag
+        if (part.startsWith("<a ") && part.includes("</a>")) {
+          const match = part.match(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/);
+          if (match) {
+            const [, href, text] = match;
+            return (
+              <a
+                key={key}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline font-semibold hover:text-blue-900"
+              >
+                {text}
+              </a>
+            );
+          }
         }
-
+  
+        // Bold + italic
         if (part.startsWith("***") && part.endsWith("***")) {
           return (
             <span
@@ -252,7 +265,10 @@ const ChatUI = () => {
               {part.slice(3, -3)}
             </span>
           );
-        } else if (part.startsWith("**") && part.endsWith("**")) {
+        }
+  
+        // Bold
+        if (part.startsWith("**") && part.endsWith("**")) {
           return (
             <span
               key={key}
@@ -261,28 +277,36 @@ const ChatUI = () => {
               {part.slice(2, -2)}
             </span>
           );
-        } else if (part.startsWith("*") && part.endsWith("*")) {
+        }
+  
+        // Italic
+        if (part.startsWith("*") && part.endsWith("*")) {
           return (
             <span key={key} className="text-black font-semibold">
               {part.slice(1, -1)}
             </span>
           );
-        } else if (part.startsWith('"') && part.endsWith('"')) {
+        }
+  
+        // Quoted
+        if (part.startsWith('"') && part.endsWith('"')) {
           return (
             <span key={key} className="text-gray-800 font-semibold">
               {part.slice(1, -1)}
             </span>
           );
         }
-
+  
+        // Default
         return part;
       });
-
+  
       return <p key={lineIndex}>{parts}</p>;
     });
-
+  
     return formattedMessage;
   };
+  
 
   // Add this to your component
   useEffect(() => {
