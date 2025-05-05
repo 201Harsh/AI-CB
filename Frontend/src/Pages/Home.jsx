@@ -238,7 +238,7 @@ const Home = () => {
                   </span>
                   <button
                     onClick={() => setSplashEnabled((prev) => !prev)}
-                    className={`w-14 h-8 flex items-center rounded-full p-1 duration-300 ease-in-out 
+                    className={`w-14 h-8 flex items-center cursor-pointer rounded-full p-1 duration-300 ease-in-out 
       ${splashEnabled ? "bg-yellow-400" : "bg-gray-600"}`}
                   >
                     <div
@@ -490,7 +490,7 @@ const Home = () => {
                     }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setIsResGen(true)}
-                    className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl
+                    className="cursor-pointer w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl
           shadow-lg transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden"
                   >
                     {/* Button shine effect */}
