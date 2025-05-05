@@ -15,7 +15,7 @@ const AutoRedirect = () => {
       } else {
         navigate("/start");
       }
-    }, 6000); // Optional delay to show the preloader
+    }, 5000); // Optional delay to show the preloader
 
     return () => clearTimeout(timer);
   }, [navigate]);
