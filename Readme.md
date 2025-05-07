@@ -392,6 +392,12 @@ SOFTWARE.
 
 ---
 
+# Live Preview
+ - see the site live at
+*https://emoaichatbot.onrender.com/*
+
+---
+
 ## 📮 Contact & Support
 
 - Lead Developer: Harsh (@201Harsh)
