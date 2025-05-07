@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user.route");
 const aiRouter = require("./routes/ai.route");
+const CreditRefillService = require("./services/creditrefile.service");
 
 const app = express();
 
@@ -13,11 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true, 
+    credentials: true,
   })
 );
 app.use(cookieParser());
 app.use("/users", userRouter);
 app.use("/ai", aiRouter);
+
+CreditRefillService();
 
 module.exports = app;

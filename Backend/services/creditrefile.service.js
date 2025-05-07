@@ -1,19 +1,23 @@
-const cron = require('node-cron');
-const userModel = require("../models/user.model");
-// Schedule a CRON job to run every day at midnight
-cron.schedule('0 0 * * *', async () => {
-  try {
-    // Find users with 0 credits and refill their credits
-    const usersToRefill = await userModel.find({ credits: 0 });
+// services/creditRefillService.js
+const cron = require("node-cron");
+const UserModel = require("../models/user.model");
 
-    if (usersToRefill.length > 0) {
-      for (let user of usersToRefill) {
-        // Refill the user's credits and update their last refill time
-        user.credits = 5; // or any value you want
-        user.lastCreditRefill = new Date();
+const MAX_CREDITS = 5;
+
+const startCreditRefillJob = () => {
+  cron.schedule("0 */12 * * *", async () => {
+    try {
+      const users = await UserModel.find();
+      for (let user of users) {
+        if (user.credits < MAX_CREDITS) {
+          user.credits = MAX_CREDITS;
+        }
+        user.emailSent = false;
         await user.save();
       }
-    } 
-  } catch (err) {
-  }
-});
+    } catch (err) {
+    }
+  });
+};
+
+module.exports = startCreditRefillJob;
