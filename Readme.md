@@ -152,21 +152,6 @@ cd Backend
 npm install
 ```
 
-- Create a .env file in the server directory:
-
-```bash
-PORT=your_Port
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-ENDG_API_KEY=your_endg_api_key
-```
-
-- Start the backend:
-
-```bash
-npx nodemon
-```
-
 ### 3. Setup Frontend
 
 ```bash
@@ -198,16 +183,6 @@ npm run dev
 ## EndGaming AI API (or you can use other AI API)
 
 ### 🔧 Configuration
-
-**Create .env in /backend:**
-
-```python
-PORT = 4000
-MONGO_URI = mongodb://localhost:27017/emoai
-JWT_SECRET = your_secure_secret_here
-ENDG_API_KEY = your_api_key_here
-INITIAL_CREDITS = 10 # Default starting credits
-```
 
 ### 📡 API Integration
 
